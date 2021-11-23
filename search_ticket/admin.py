@@ -1,12 +1,12 @@
 from django.contrib import admin
 
-from search_ticket.models import Route, RouteStation, Station, Train
+from search_ticket.models import RoutTrain, Route, RouteStation, Station, Train
 
 
 @admin.register(Route)
 class RouteAdmin(admin.ModelAdmin):
-    list_display = ('start_point','end_point', "train")
-    fields = ('start_point','end_point', "train", "slug")
+    list_display = ('start_point','end_point', "rout_train")
+    fields = ('start_point','end_point', "rout_train", "slug")
 
 
 @admin.register(Station)
@@ -17,8 +17,14 @@ class StationAdmin(admin.ModelAdmin):
 
 @admin.register(Train)
 class TrainAdmin(admin.ModelAdmin):
-    list_display = ('station', "number_of_railcar")
-    fields = ('station', "number_of_railcar")
+    list_display = ("name","number_of_railcar",)
+    fields = ("name", "number_of_railcar", )
+
+
+@admin.register(RoutTrain)
+class RoutTrainAdmin(admin.ModelAdmin):
+    list_display = ("route",)
+    fields = ("route", "train" )
 
 
 @admin.register(RouteStation)

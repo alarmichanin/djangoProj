@@ -9,9 +9,12 @@ class Route(models.Model):
         on_delete=models.CASCADE, related_name="start_point")
     end_point = models.ForeignKey("Station", verbose_name=("End name"), 
         on_delete=models.CASCADE, related_name="end_point")
-    train = models.ForeignKey("Train", verbose_name=("train"), on_delete=models.CASCADE)
+    
     slug = models.SlugField(max_length=255, unique=True, db_index=True,
-                            verbose_name="URL", null=True)
+                            verbose_name="URL", null=True, blank=True)
+    rout_train = models.ForeignKey("RoutTrain", related_name="rout_train", on_delete=models.CASCADE, null=True, blank=True)                            
+
+    rout_station = models.ForeignKey("RouteStation", related_name="route_station" , on_delete=models.CASCADE, null=True)
 
     def __str__(self) -> str:
         return f"{self.start_point} - {self.end_point}"
@@ -28,20 +31,42 @@ class Station(models.Model):
 class Train(models.Model):
     """ """
 
-    station = models.ForeignKey(Station, verbose_name=(""), on_delete=models.CASCADE)
     number_of_railcar = models.IntegerField("number of railcar")
+    name = models.CharField(max_length = 150, null=True)
+    
+    def __str__(self) -> str:
+        return f"{self.name} - {self.number_of_railcar}"
+
+
+class RoutTrain(models.Model):
+    """ """
+
+    route = models.ForeignKey(Route,  related_name="routtrain_route", on_delete=models.CASCADE)
+    train = models.ManyToManyField(Train, related_name="routtrain_train", verbose_name=(""))
 
     def __str__(self) -> str:
-        return f"{self.station} - {self.number_of_railcar}"
+        return f"RoutTrain - {self.route} "
 
 
 class RouteStation(models.Model):
     """ """
 
-    route = models.ForeignKey(Route, verbose_name=(""), on_delete=models.CASCADE)
+    route = models.ForeignKey(Route,  on_delete=models.CASCADE)
     stations = models.ManyToManyField(Station, verbose_name=(""))
     time = models.TimeField(auto_now=False, auto_now_add=False)
     price_from_start = models.PositiveIntegerField("price")
 
     def __str__(self) -> str:
         return f"{self.route} - {self.stations}"
+
+
+
+# def arr():
+#     storage = []
+
+#     for i in rout_station:
+#         if i.stations.filter(name = a.name) and  i.stations.filter(name = b.name):
+#             if i.stations.get(name=a.name).id < i.stations.get(name=b.name).id:
+#                 storage.append(i.route)
+#     return storage        
+            
