@@ -1,0 +1,15 @@
+{% extends "../booking/base.html" %}
+
+
+{% block content %}
+<hr>
+	{% for rout in all_routs %}
+        {{rout.route}}
+        <hr>    
+      
+    {% endfor %}
+      {{start_point}}
+        <hr>
+        {{end_point}}
+
+{% endblock content %}
