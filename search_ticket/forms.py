@@ -7,15 +7,14 @@ from .models import *
 
 class SearchRouteForm(forms.Form):
     """ class of creating new post using modelform """
- 
+
     start_point = forms.CharField(
-        widget=forms.TextInput(attrs={"class": "form-control"}))
+        widget=forms.TextInput(attrs={"class": "validate"}))
     end_point = forms.CharField(
-        widget=forms.TextInput(attrs={"class": "form-control"}))
+        widget=forms.TextInput(attrs={"class": "validate"}))
     # receive_date = forms.DateField(widget=forms.DateInput(attrs={'class': 'form-control ','readonly':True }),
     # )
 
-    
     # class Meta:
     #     # rewrite static photo field
 
