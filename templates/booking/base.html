@@ -1,18 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-	
+	<title>Booking</title>
+
+	{% load static %}
+	<link rel="icon" type="image" href="{% static 'base/img/favicon.png' %}">
+	<link type="text/css" rel="stylesheet" href="{% static 'base/css/materialize.min.css' %}"
+		media="screen,projection" />
+	<link rel="stylesheet" href="{% static 'base/css/base.css' %}">
+
 	{% block link %}
 
 	{% endblock %}
 </head>
+
 <body>
-	BASE
-	{% block content %}
-	    
-	{% endblock content %}
+	<header>
+		<nav class="nav-container">
+			<div class="container top-bar-container">
+				<a href="#" class="logo-container">
+					<div class="logo-icon-container">
+						{% load static %}
+						<img class="logo-icon" src="{% static 'base/img/favicon.png' %}" alt="Train">
+					</div>
+					<h1>
+						<span class="logo-title logo-title-bold">BOO</span>
+						<span class="logo-title">KING</span>
+					</h1>
+				</a>
+				<div class="nav-burger-menu">
+					<span class="nav-burger-menu-row"></span>
+					<span class="nav-burger-menu-row"></span>
+					<span class="nav-burger-menu-row"></span>
+				</div>
+				<ul class="nav-list">
+					<li class="nav-list-item">
+						<a href="#about">About</a>
+					</li>
+					<li class="nav-list-item">
+						<a href="#testimonials">Testimonials</a>
+					</li>
+					<li class="nav-list-item">
+						<a href="#features">Features</a>
+					</li>
+					<li class="nav-list-item">
+						<a href="#team">Team</a>
+					</li>
+					<li class="nav-list-item">
+						<a href="#pricing">Pricing</a>
+					</li>
+					<li class="nav-list-item">
+						<a href="#сontact">Contact</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	<div class="container">
+
+		<div class="search-tickets-title">
+			<h1>search your tickets online</h1>
+		</div>
+
+		{% block content %}
+
+		{% endblock content %}
+	</div>
+	{% load static %}
+	<script src="{% static 'base/js/materialize.min.js' %}"></script>
+	<script src="{% static 'base/js/base.js' %}"></script>
+	<script src="{% static 'search_ticket/js/home_page.js' %}"></script>
 </body>
+
 </html>
