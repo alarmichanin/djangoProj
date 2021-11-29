@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Booking</title>
-
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 	{% load static %}
 	<link rel="icon" type="image" href="{% static 'base/img/favicon.png' %}">
 	<link type="text/css" rel="stylesheet" href="{% static 'base/css/materialize.min.css' %}"
@@ -21,7 +21,7 @@
 	<header>
 		<nav class="nav-container">
 			<div class="container top-bar-container">
-				<a href="#" class="logo-container">
+				<a href="{% url 'home' %}" class="logo-container">
 					<div class="logo-icon-container">
 						{% load static %}
 						<img class="logo-icon" src="{% static 'base/img/favicon.png' %}" alt="Train">
@@ -38,22 +38,22 @@
 				</div>
 				<ul class="nav-list">
 					<li class="nav-list-item">
-						<a href="#about">About</a>
+						<a href="{% url 'about_view' %}">About</a>
 					</li>
 					<li class="nav-list-item">
-						<a href="#testimonials">Testimonials</a>
+						<a href="{% url 'testimonials_view' %}">Testimonials</a>
 					</li>
 					<li class="nav-list-item">
-						<a href="#features">Features</a>
+						<a href="{% url 'features_view' %}">Features</a>
 					</li>
 					<li class="nav-list-item">
-						<a href="#team">Team</a>
+						<a href="{% url 'team_view' %}">Team</a>
 					</li>
 					<li class="nav-list-item">
-						<a href="#pricing">Pricing</a>
+						<a href="{% url 'pricing_view' %}">Pricing</a>
 					</li>
 					<li class="nav-list-item">
-						<a href="#сontact">Contact</a>
+						<a href="{% url 'contacts_view' %}">Contact</a>
 					</li>
 				</ul>
 			</div>
@@ -76,4 +76,4 @@
 	<script src="{% static 'search_ticket/js/home_page.js' %}"></script>
 </body>
 
-</html>
+</html>	

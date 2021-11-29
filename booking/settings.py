@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "search_ticket",
     "order_ticket",
+    "bootstrap4",       
+    "bootstrap_datepicker_plus"
 ]
 
 MIDDLEWARE = [
