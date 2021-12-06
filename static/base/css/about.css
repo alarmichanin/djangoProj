@@ -1,0 +1,17 @@
+:root {
+    --color-white: #ffffff;
+    --color-dark: #111111;
+    --color-ligth-green: rgba(2, 192, 130, .75);
+}
+
+.page-footer {
+    border-radius: 20px;
+    padding: 15px;
+    background-color: var(--color-ligth-green);
+
+    margin-bottom: 50px;
+}
+
+.collection .collection-item{
+    background-color: var(--color-ligth-green);
+}
