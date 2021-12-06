@@ -1,5 +1,7 @@
 :root {
   --color-white: #ffffff;
+  --color-dark: #111111;
+  --color-green: rgba(2, 192, 130, .75);
 }
 
 *,
@@ -101,7 +103,7 @@ a {
 
 .logo-icon-container {
   margin-right: 5px;
-  background: #3aced3;
+  background: var(--color-green);
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -235,7 +237,7 @@ a {
   margin-top: 0px;
 }
 
-.search-tickets-title h1{
+.search-tickets-title h1 {
   font-size: 35px;
   font-weight: 700;
   line-height: 110%;
