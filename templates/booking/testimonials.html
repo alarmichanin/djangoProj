@@ -1,14 +1,75 @@
 {% extends "../booking/base.html" %}
-{% load static %}
 
 
 {% block link %}
+{% load static %}
 <link rel="stylesheet" href="{% static 'base/css/testimonials.css' %}">
 {% endblock %}
 
 
 {% block content %}
-    Testimonials text
+    <ul class="collapsible collapsible-text">
+        <li>
+            <div class="collapsible-header">Railway tickets online</div>
+            <div class="collapsible-body"><span>Tickets that you receive after payment is a complete travel documents, which gives you the right to travel by ukrainian trains. Tickets are of 2 types: electronic and delayed printing. </span></div>
+        </li>
+        <li>
+            <div class="collapsible-header">Electronic ticket</div>
+            <div class="collapsible-body"><span> This is a travelling document you can go directly to your train car with.</span></div>
+        </li>
+        <li>
+            <div class="collapsible-header">Delay print ticket</div>
+            <div class="collapsible-body"><span>Ticket with delay printing - is a travel document that needs to be exchanged at the railway ticket office, at any time, but no later than 15 minutes before train departure. Big railway stations have separate ticket offices for exchanging delay printing tickets to real tickets.</span></div>
+        </li>
+        <li>
+            <div class="collapsible-header">Pay</div>
+            <div class="collapsible-body"><span> You can pay for your tickets using banking cards VISA/MASTER CARD/MAESTRO. 
+                <br/><br/>Top/Bottom seat</span></div>
+        </li>
+        <li>
+            <div class="collapsible-header">Top/Bottom seat</div>
+            <div class="collapsible-body"><span>Top/bottom position in ukrainian trains is numbered as follows: even - the top, odd - the bottom.</span></div>
+        </li> 
+        <li>
+            <div class="collapsible-header">Tickets for children seat</div>
+            <div class="collapsible-body"><span>Ukrainian railways has discounts for children. The discount amount depends on the age of the child, you can see after you have specify the age of the child and add tickets to the basket. Ticket for the child is only valid if you submit a document confirming the child's age, when boarding on a train. Children up to 6 years old travel for free, without a separate seat. Children from 6 to 14 years old have a discount. Children from 14 years old have full price of the ticket. When travelling with more than 2 children up to 6 years old per 1 adult you need to buy a ticket for a seat.</span></div>
+        </li>
+        <li>
+            <div class="collapsible-header">Documents required for travel</div>
+            <div class="collapsible-body"><span>For travelling by ukrainian railways you need to have one of the following identity documents:
+                <br/>- passport;
+                <br/>- birth certificate (for children up to 14 years);
+                <br/>- driver's license.</span></div>
+        </li>
+        <li>
+            <div class="collapsible-header">Luggage transportation</div>
+            <div class="collapsible-body"><span>Passenger has a right to take a baggage not more then 36 kilograms.</span></div>
+        </li>
+        <li>
+            <div class="collapsible-header">Transportation of animals</div>
+            <div class="collapsible-body"><span>Dogs:
+                <br/>- transportation of animals is carried out in the presence of a veterinary document and an electronic ticket for the transportation of the animal (you need to put a mark on the transportation of the animal under the passenger's data);
+                <br/>- dogs of small breeds must be transported in a bag with a waterproof or absorbent bottom. Animals can also be transported in SV cars provided that all seats in the compartment are redeemed;
+                <br/>- dogs of large breeds (above 45 cm) are transported in a muzzle and on a leash, in a separate compartment, in which the owner of the animal must buy all 4 seats.
+                
+                <br/><br/>Cats:
+                <br/>- cats are transported in special boxes, baskets, cages with a waterproof or absorbent bottom. For transportation it is necessary to issue a receipt for the transportation of the animal (put a mark on the transportation of the animal under the passenger's data). One passenger can transport only one cat.
+                
+                <br/><br/> Birds:
+                <br/>- small house animals and decorative house birds (not more than two individuals) are transported in boxes, baskets, cages or containers with a waterproof absorbent bottom (not more than one place of hand luggage).</span></div>
+        </li>
+        <li>
+            <div class="collapsible-header">Rules for boarding trains/buses with 21.10.2021</div>
+            <div class="collapsible-body"><span>According to the decree of the Cabinet of Ministers of Ukraine, from 10/21/2021 passengers over 18 years old when boarding a train, bus or plane must present one of the following documents:
+                negative PCR test (done no earlier than 72 hours before the trip)
+                negative rapid antigen test (done no earlier than 72 hours before travel)
+                a document confirming the receipt of a full course of vaccination;
+                a document confirming the receipt of one dose of a pre-dose vaccine;
+                an international, domestic or foreign certificate confirming vaccination against COVID-19 with one dose of a single dose vaccine (yellow certificates) or one dose of a single dose vaccine or two doses of a single dose vaccine (green certificates)
+                a document on recovery, the action of which is confirmed using the Unified State Web Portal of Electronic Services, in particular, using the mobile application of the Portal Diya (Diya).</span></div>
+        </li>
+    </ul>
 {% endblock content %}
-
-
+{% load static %}
+<script type="module" src="{% static 'base/js/materialize.min.js' %}"></script>
+<script type="module" src="{% static 'base/js/testimonials.js' %}"></script>

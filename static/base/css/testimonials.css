@@ -1,0 +1,23 @@
+:root {
+    --color-white: #ffffff;
+    --color-dark: #111111;
+    --color-green: rgba(2, 192, 130, .75);
+}
+
+.collapsible {
+    border-radius: 20px;
+}
+
+.collapsible-header {
+    border-radius: 20px;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--color-dark);
+    background-color: var(--color-white);
+}
+
+.collapsible-text {
+    font-size: 15px;
+    color: var(--color-dark);
+    background-color: var(--color-white);
+}
