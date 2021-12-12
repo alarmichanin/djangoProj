@@ -56,6 +56,7 @@ class AvaluableRouts(DataMixin, ListView):
             get_station_by_name(self.request.session["start_point"]),
             get_station_by_name(self.request.session["end_point"]),
         )
+        print(RouteStation.objects.filter(route__in=result))
         return RouteStation.objects.filter(route__in=result)
 
     def get_context_data(self, *, object_list=None, **kwargs):

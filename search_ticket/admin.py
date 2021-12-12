@@ -5,8 +5,8 @@ from search_ticket.models import RoutTrain, Route, RouteStation, Station, Train
 
 @admin.register(Route)
 class RouteAdmin(admin.ModelAdmin):
-    list_display = ('start_point','end_point', "rout_train")
-    fields = ('start_point','end_point', "rout_train", "slug")
+    list_display = ('start_point','end_point')
+    fields = ('start_point','end_point', "slug")
     prepopulated_fields = {"slug": ("start_point", "end_point")}
 
 

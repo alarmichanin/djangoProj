@@ -26,13 +26,13 @@ class Route(models.Model):
         null=True,
         blank=True,
     )
-    rout_train = models.ForeignKey(
-        "RoutTrain",
-        related_name="rout_train",
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-    )
+    # rout_train = models.ForeignKey(
+    #     "RoutTrain",
+    #     related_name="rout_train",
+    #     on_delete=models.CASCADE,
+    #     null=True,
+    #     blank=True,
+    # )
 
     # rout_station = models.ForeignKey(
     #     "RouteStation",
