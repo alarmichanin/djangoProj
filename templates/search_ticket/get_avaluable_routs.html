@@ -6,7 +6,7 @@
 	{% for rout in all_routs %}
     <div class="contant", style="display: grid; grid-template-columns: 1070px 100px;">
       <a href="">{{rout.route}} </a>
-      <a class="justify-content-end" href="{% url 'order_ticket' rout_slug=rout.route.slug %}">Buy ticket</a>
+      <a class="justify-content-end" href="{% url 'order_railcar' rout_slug=rout.route.slug %}">Buy ticket</a>
     </div>  
     <hr>    
   {% endfor %}
