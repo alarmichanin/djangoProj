@@ -30,5 +30,5 @@ class RoutTrainAdmin(admin.ModelAdmin):
 
 @admin.register(RouteStation)
 class RouteStationAdmin(admin.ModelAdmin):
-    list_display = ("time", "price_from_start")
-    fields = ("stations", "time",  "price_from_start")
+    list_display = ('route', "time", "price_from_start")
+    fields = ('route', "stations", "time",  "price_from_start")

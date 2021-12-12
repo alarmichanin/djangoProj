@@ -34,12 +34,12 @@ class Route(models.Model):
         blank=True,
     )
 
-    rout_station = models.ForeignKey(
-        "RouteStation",
-        related_name="route_station",
-        on_delete=models.CASCADE,
-        null=True,
-    )
+    # rout_station = models.ForeignKey(
+    #     "RouteStation",
+    #     related_name="route_station",
+    #     on_delete=models.CASCADE,
+    #     null=True,
+    # )
 
     def __str__(self) -> str:
         return f"{self.start_point} - {self.end_point}"
@@ -81,6 +81,7 @@ class RoutTrain(models.Model):
 class RouteStation(models.Model):
     """ """
 
+    route = models.ForeignKey(Route, on_delete=models.CASCADE, null=True)
     stations = models.ManyToManyField(Station, verbose_name=(""))
     time = models.TimeField(auto_now=False, auto_now_add=False)
     price_from_start = models.PositiveIntegerField("price")
