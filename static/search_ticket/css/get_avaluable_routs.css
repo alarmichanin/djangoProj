@@ -1,0 +1,48 @@
+:root {
+    --color-white: #ffffff;
+    --color-dark: #111111;
+    --color-ligth-green: rgba(2, 192, 130, .75);
+}
+
+.train-container {
+    background-color: var(--color-ligth-green);
+    display: flex;
+    padding: 30px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    color: var(--color-dark);
+}
+
+.train-container a {
+    color: var(--color-dark);
+}
+
+.train-container-img {
+    border-radius: 10px;
+    width: 15%;
+    height: auto;
+}
+
+.train-container-name {
+    width: 40%;
+    font-size: 20px;
+    font-weight: 700;
+    margin-left: 20px;
+}
+
+.train-container-buy {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
+}
+
+.btn-buy {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-white);
+    font-weight: 600;
+    border-radius: 15px;
+    background: #ffd600;
+}

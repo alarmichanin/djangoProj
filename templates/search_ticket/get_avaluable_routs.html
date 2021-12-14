@@ -1,17 +1,25 @@
 {% extends "../booking/base.html" %}
 
+{% block link %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'search_ticket/css/get_avaluable_routs.css' %}">
+{% endblock %}
 
 {% block content %}
-<hr>
-	{% for rout in all_routs %}
-    <div class="contant", style="display: grid; grid-template-columns: 1070px 100px;">
-      <a href="">{{rout.route}} </a>
-      <a class="justify-content-end" href="{% url 'order_railcar' rout_slug=rout.route.slug %}">Buy ticket</a>
-    </div>  
-    <hr>    
-  {% endfor %}
-  {{start_point}}
-    <hr>
-  {{end_point}}
+<div>
+  <h5>Found routes from {{start_point}} to {{end_point}}</h5>
+</div>
 
+{% for rout in all_routs %}
+<div class="contant train-container">
+  {% load static %}
+  <img class="train-container-img" src="{% static 'search_ticket/img/DIESEL.png' %}" alt="Train">
+  <p class="train-container-name">{{rout.route}}</p>
+  <div class="train-container-buy">
+    <a class="justify-content-end waves-effect waves-light btn btn-buy"
+    href="{% url 'order_railcar' rout_slug=rout.route.slug %}"><i class="material-icons left">attach_money</i>Buy
+    ticket</a>
+  </div>
+</div>
+{% endfor %}
 {% endblock content %}
