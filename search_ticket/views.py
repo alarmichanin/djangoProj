@@ -9,11 +9,12 @@ from search_ticket.utils import DataMixin
 from search_ticket.models import Route, RouteStation
 from .forms import SearchRouteForm
 from icecream import ic
+
+
 # Create your views here.
 
 
 def get_home_page(request):
-
     if request.method == 'POST':
         form = SearchRouteForm(request.POST)
 
@@ -24,7 +25,12 @@ def get_home_page(request):
             request.session['end_point'] = form.cleaned_data["end_point"]
             return HttpResponseRedirect(reverse("get_avaluable_routs"))
         else:
+<<<<<<< Updated upstream
             ic("not valid")    
+=======
+            messages.add_message(request, messages.Error,
+                                 'Some problems came out, fix them and try again')
+>>>>>>> Stashed changes
     else:
         print("not valid")
         form = SearchRouteForm()
@@ -32,7 +38,7 @@ def get_home_page(request):
     return render(request, template_name="search_ticket/home_page.html", context={'form': form})
 
 
-class AvaluableRouts(DataMixin ,ListView):
+class AvaluableRouts(DataMixin, ListView):
     """ all avaluable routs according 
         to parameters 
     """
@@ -41,18 +47,73 @@ class AvaluableRouts(DataMixin ,ListView):
     template_name = "search_ticket/get_avaluable_routs.html"
     context_object_name = "all_routs"
 
-
     def get_queryset(self):
-
         result = get_routs_according_to_direction(get_station_by_name(self.request.session["start_point"]),
-            get_station_by_name(self.request.session["end_point"]))
-        return RouteStation.objects.filter(route__in = result)
-
+                                                  get_station_by_name(self.request.session["end_point"]))
+        return RouteStation.objects.filter(route__in=result)
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)  # like dynamic list
         c_def = self.get_user_context(
-            start_point = self.request.session["start_point"],
-            end_point = self.request.session["end_point"]
+            start_point=self.request.session["start_point"],
+            end_point=self.request.session["end_point"]
         )
+<<<<<<< Updated upstream
         return dict(list(context.items()) + list(c_def.items()))
+=======
+        return dict(list(context.items()) + list(c_def.items()))
+
+
+class AboutView(DataMixin, TemplateView):
+    template_name = "booking/about.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)  # add some variable to show
+        c_def = self.get_user_context()
+        return dict(list(context.items()) + list(c_def.items()))
+
+
+class TestimonialsView(DataMixin, TemplateView):
+    template_name = "booking/testimonials.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)  # add some variable to show
+        c_def = self.get_user_context()
+        return dict(list(context.items()) + list(c_def.items()))
+
+
+class FeaturesView(DataMixin, TemplateView):
+    template_name = "booking/features.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)  # add some variable to show
+        c_def = self.get_user_context()
+        return dict(list(context.items()) + list(c_def.items()))
+
+
+class TeamView(DataMixin, TemplateView):
+    template_name = "booking/team.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)  # add some variable to show
+        c_def = self.get_user_context()
+        return dict(list(context.items()) + list(c_def.items()))
+
+
+class PricingView(DataMixin, TemplateView):
+    template_name = "booking/pricing.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)  # add some variable to show
+        c_def = self.get_user_context()
+        return dict(list(context.items()) + list(c_def.items()))
+
+
+class ContactsView(DataMixin, TemplateView):
+    template_name = "booking/contacts.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)  # add some variable to show
+        c_def = self.get_user_context()
+        return dict(list(context.items()) + list(c_def.items()))
+>>>>>>> Stashed changes
