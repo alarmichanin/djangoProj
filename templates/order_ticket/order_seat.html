@@ -4,9 +4,9 @@
 {% block content %}
   GREAt
   {{ route_slug }}
-  <form action="{% url 'order_railcar' route_slug  %}" method="POST">
+  <form action="{% url 'order_seat' route_slug railcar  %}" method="POST">
     {% csrf_token %}
-    <input type="text" name="railcar" id="id">
+    <input type="text" name="seat" id="id">
     <button type="submit" >sibmit</button>
   </form>  
   {# <a href="{% url 'order_railcar' route_slug  %}">BUTTON</a> #}
