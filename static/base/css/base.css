@@ -2,6 +2,7 @@
   --color-white: #ffffff;
   --color-dark: #111111;
   --color-green: rgba(2, 192, 130, .75);
+  --color-red: rgba(240, 37, 37, 0.75);
 }
 
 *,
@@ -10,6 +11,10 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+.hiden {
+  display: none;
 }
 
 .container {
@@ -42,8 +47,9 @@ body {
   font-size: 14px;
   line-height: 1.5;
   color: var(--color-white);
-  background: rgba(0, 0, 0, 0.63) url(../img/bg-base.jpg) right top no-repeat fixed;
-  background-size: 100%;
+  /* background: rgba(0, 0, 0, 0.63) url(../img/bg-base.jpg) right top no-repeat fixed; */
+  background: rgba(0, 0, 0, 0.63) url(../img/bg-base.jpg) no-repeat center center fixed;
+  background-size: cover;
 }
 
 img {
@@ -65,6 +71,16 @@ a {
   cursor: pointer;
 }
 
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--color-white);
+  font-weight: 600;
+  border-radius: 15px;
+  background: #ffd600;
+}
 
 .header-bg {
   background: #000 url(../img/hero-2.jpg) no-repeat center top/cover;
@@ -132,14 +148,20 @@ a {
 @media (max-width: 767px) {
   .nav-list {
     position: absolute;
-    top: 72px;
+    top: 64px;
     left: 0;
     flex-direction: column;
     align-items: center;
     width: 100%;
     background: #494d55;
-    transform: translate(130%, 0%);
+    /* transform: translate(130%, 0%); */
     transition: all 2s ease;
+  }
+
+  @media (min-width: 767px) {
+    .nav-list {
+      margin-top: 0px;
+    }
   }
 
   .nav-list:hover {
@@ -208,7 +230,7 @@ a {
 .nav-burger-menu {
   display: none;
   padding: 9px 10px;
-  background: #494d55;
+  background: var(--color-green);
   border-radius: 5px;
   cursor: pointer;
 }
@@ -219,8 +241,8 @@ a {
   }
 }
 
-.nav-burger-menu:hover~.nav-list {
-  transform: translate(0%, 0%);
+.nav-burger-menu:active ~ .nav-list {
+  /* transform: translate(0%, 0%); */
   transition: all 0.3s ease;
 }
 
@@ -244,4 +266,28 @@ a {
   margin: 55px 0;
   text-transform: uppercase;
   text-align: center;
+}
+
+.collapsible {
+  margin-top: 50px;
+  border-radius: 20px;
+}
+
+.collapsible-header {
+  border-radius: 20px;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 10px;
+  color: var(--color-red);
+  background-color: var(--color-white);
+}
+
+.collapsible-body {
+  padding: 15px;
+}
+
+.collapsible-text {
+  font-size: 13px;
+  color: var(--color-red);
+  background-color: var(--color-white);
 }
