@@ -1,44 +1,231 @@
-# from order_ticket.services.database.order_seat import fill_tickets
+from order_ticket.services.order_ticket import (
+    get_discount,
+    get_route,
+    get_train,
+    get_ticket,
+    get_client_ip,
+    create_customer_ticket,
+    get_ordered_ticket,
+)
+from search_ticket.services.find_route.routs import get_station_by_name
 from django.http import HttpResponseRedirect
-from search_ticket.utils import DataMixin
-from icecream import ic
+from django.views.generic import TemplateView
 from order_ticket.models import Ticket
-from search_ticket.models import Route
+from search_ticket.models import Route, Train
 from django.views.generic.edit import FormView
 from django.shortcuts import render
 from django.urls import reverse
+from order_ticket.forms import OrderTicketForm
+from django.contrib import messages
 
 
-def order_railcar(request, rout_slug):
+def order_train(request, start, end, rout_slug):
+
+    if request.method == "POST":
+        train = request.POST.get("train")
+        return HttpResponseRedirect(
+            reverse(
+                "order_railcar",
+                kwargs={
+                    "start": start,
+                    "end": end,
+                    "rout_slug": rout_slug,
+                    "train": train,
+                },
+            )
+        )
+    available_trains = Ticket.objects.filter(
+        route=Route.objects.get(slug=rout_slug), is_taken=False
+    )
+    available_trains = {elem.train.slug for elem in available_trains}
+    return render(
+        request,
+        "order_ticket/order_train.html",
+        context={
+            "route_slug": rout_slug,
+            "start": start,
+            "end": end,
+            "trains": available_trains,
+        },
+    )
+
+
+def order_railcar(request, start, end, rout_slug, train):
 
     if request.method == "POST":
         railcar = request.POST.get("railcar")
-        ic(rout_slug, railcar)
-        return HttpResponseRedirect(reverse("order_seat", kwargs={"rout_slug": rout_slug, "railcar":railcar}))
-    ic(rout_slug)
-    print("here")
-    return render(request, "order_ticket/choose_place.html", context={"route_slug" : rout_slug})
+        return HttpResponseRedirect(
+            reverse(
+                "order_seat",
+                kwargs={
+                    "start": start,
+                    "end": end,
+                    "rout_slug": rout_slug,
+                    "train": train,
+                    "railcar": railcar,
+                },
+            )
+        )
+
+    available_reilcars = {
+        elem.railcar_number
+        for elem in Ticket.objects.filter(
+            route=Route.objects.get(slug=rout_slug),
+            train=Train.objects.get(slug=train),
+            is_taken=False,
+        )
+    }
+
+    return render(
+        request,
+        "order_ticket/choose_place.html",
+        context={
+            "start": start,
+            "end": end,
+            "route_slug": rout_slug,
+            "train": train,
+            "railcars": available_reilcars,
+        },
+    )
 
 
-def order_seat(request, rout_slug, railcar):
+def order_seat(request, start, end, rout_slug, train, railcar):
 
     if request.method == "POST":
         seat = request.POST.get("seat")
-        return HttpResponseRedirect(reverse("order_tiket", kwargs={"rout_slug": rout_slug, "railcar":railcar, "seat" : seat}))
-    ic(rout_slug)
-    print("here")
-    return render(request, "order_ticket/order_seat.html", context={"route_slug" : rout_slug, "railcar": railcar})
+        return HttpResponseRedirect(
+            reverse(
+                "order_ticket",
+                kwargs={
+                    "start": start,
+                    "end": end,
+                    "rout_slug": rout_slug,
+                    "train": train,
+                    "railcar": railcar,
+                    "seat": seat,
+                },
+            )
+        )
+
+    available_seats = {
+        elem.seat
+        for elem in Ticket.objects.filter(
+            route=Route.objects.get(slug=rout_slug),
+            train=Train.objects.get(slug=train),
+            railcar_number=railcar,
+            is_taken=False,
+        )
+    }
+
+    return render(
+        request,
+        "order_ticket/order_seat.html",
+        context={
+            "start": start,
+            "end": end,
+            "route_slug": rout_slug,
+            "train": train,
+            "railcar": railcar,
+            "seats": available_seats,
+        },
+    )
 
 
 class OrderTicket(FormView):
-    
+
     model = Ticket
     template_name = "order_ticket/order_ticket.html"
 
-    def get_queryset(self):
+    def post(self, request, *args, **kwargs):
+        start = self.kwargs["start"]
+        end = self.kwargs["end"]
+        rout_slug = self.kwargs["rout_slug"]
+        train_slug = self.kwargs["train"]
+        railcar = self.kwargs["railcar"]
+        seat = self.kwargs["seat"]
 
-        return Ticket.objects.all()
+        form = OrderTicketForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data["name"]
+            surname = form.cleaned_data["surname"]
+            patronymic = form.cleaned_data["patronymic"]
+            disc = form.cleaned_data["discount"]
+            if disc:
+                if not get_discount(disc):
+                    messages.add_message(request, messages.ERROR, "discount is invalid")
+                    return HttpResponseRedirect(
+                        reverse(
+                            "order_tiket",
+                            kwargs={
+                                "start": start,
+                                "end": end,
+                                "rout_slug": rout_slug,
+                                "train": train_slug,
+                                "railcar": railcar,
+                                "seat": seat,
+                            },
+                        )
+                    )
+                discount = get_discount(disc)
+            else:
+                discount = 0
+            email = form.cleaned_data["email"]
+            ticket = get_ticket(
+                get_route(rout_slug), get_train(train_slug), railcar, seat
+            )
+            create_customer_ticket(
+                get_client_ip(request),
+                ticket,
+                get_station_by_name(start),
+                get_station_by_name(end),
+                name,
+                surname,
+                patronymic,
+                discount,
+                email,
+            )
+            return HttpResponseRedirect(
+                reverse(
+                    "ticket_info",
+                    kwargs={
+                        "ip": get_client_ip(request),
+                        "ticket": ticket.id,
+                    },
+                )
+            )
+
+        else:
+            messages.add_message(request, messages.ERROR, "Form is invalid")
+            return HttpResponseRedirect(
+                reverse(
+                    "order_ticket",
+                    kwargs={
+                        "start": start,
+                        "end": end,
+                        "rout_slug": rout_slug,
+                        "train": train_slug,
+                        "railcar": railcar,
+                        "seat": seat,
+                    },
+                )
+            )
 
     def get_context_data(self, **kwargs):
-        context = {"title" : "order"}
+
+        form = OrderTicketForm(self.request.POST)
+        context = {"title": "order", "form": form}
+        return context
+
+
+class TicketInfo(TemplateView):
+
+    template_name = "order_ticket/ticket_info.html"
+
+    def get_context_data(self, **kwargs):
+
+        ticket_id = self.kwargs["ticket"]
+        ip = self.kwargs["ip"]
+
+        ordered_ticket = get_ordered_ticket(ticket_id, ip)
+        context = {"ordered_ticket" : ordered_ticket}
         return context

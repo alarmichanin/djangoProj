@@ -7,7 +7,7 @@
 
 {% block content %}
 <div>
-  <h5>Found routes from {{start_point}} to {{end_point}}</h5>
+  <h5>Found routes from {{start}} to {{end}}</h5>
 </div>
 
 {% for rout in all_routs %}
@@ -17,7 +17,7 @@
   <p class="train-container-name">{{rout.route}}</p>
   <div class="train-container-buy">
     <a class="justify-content-end waves-effect waves-light btn btn-buy"
-    href="{% url 'order_railcar' rout_slug=rout.route.slug %}"><i class="material-icons left">attach_money</i>Buy
+    href="{% url 'order_train' start=start end=end  rout_slug=rout.route.slug %}"><i class="material-icons left">attach_money</i>Buy
     ticket</a>
   </div>
 </div>

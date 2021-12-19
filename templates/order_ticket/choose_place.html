@@ -2,12 +2,14 @@
 
 
 {% block content %}
-  GREAt
-  {{ route_slug }}
-  <form action="{% url 'order_railcar' route_slug  %}" method="POST">
+  railcar
+  {% for elem in railcars %}
+    {{elem}}    
+  {% endfor %}
+  <form action="{% url 'order_railcar' start end route_slug train %}" method="POST">
     {% csrf_token %}
     <input type="text" name="railcar" id="id">
-    <button type="submit" >sibmit</button>
+    <button type="submit" >submit</button>
   </form>  
   {# <a href="{% url 'order_railcar' route_slug  %}">BUTTON</a> #}
 {% endblock content %}

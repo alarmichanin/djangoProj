@@ -2,13 +2,13 @@
 
 
 {% block content %}
-  SEAT
-  {% for elem in seats %}
-    {{elem}}
+  TRAIN
+  {% for train in trains %}
+    {{train}}
   {% endfor %}
-  <form action="{% url 'order_seat' start end route_slug train railcar  %}" method="POST">
+  <form action="{% url 'order_train' start end route_slug  %}" method="POST">
     {% csrf_token %}
-    <input type="text" name="seat" id="id">
+    <input type="text" name="train" id="id">
     <button type="submit" >sibmit</button>
   </form>  
   {# <a href="{% url 'order_railcar' route_slug  %}">BUTTON</a> #}

@@ -25,7 +25,7 @@ class Discount(models.Model):
     discount = models.PositiveBigIntegerField()
 
     def __str__(self) -> str:
-        return super().__str__()
+        return f"Discount(code={self.discount_code}, discount={self.discount})"
 
 
 class RailCarType(models.Model):
@@ -49,12 +49,14 @@ class Ticket(models.Model):
     is_taken = models.BooleanField(default=False)
 
     def __str__(self) -> str:
-        return ""
+        return f"""Ticket(train={self.train}, route={self.route}, railcar_num={self.railcar_number},
+        seat={self.seat}, is_taken={self.is_taken})"""
 
 
 class OrderTicket(models.Model):
     """ """
 
+    ip = models.CharField(max_length=100, null=True)
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
     start_point = models.ForeignKey(
         Station,
@@ -73,7 +75,7 @@ class OrderTicket(models.Model):
     customer_surname = models.CharField(("surname"), max_length=50)
     customer_patronymic = models.CharField(("patronymic"), max_length=50)
 
-    discount = models.ForeignKey(Discount, on_delete=models.CASCADE)
+    discount = models.PositiveIntegerField(null=True)
     price = models.PositiveIntegerField(("ticket price"))
     email = models.CharField(
         ("customer email"),

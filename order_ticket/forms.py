@@ -39,3 +39,16 @@ class OrderRailcarForm(forms.Form):
 
         print(Ticket.objects.filter(route=self.route))
         self.fields["like"] = forms.ChoiceField(choices=a)
+
+
+class OrderTicketForm(forms.Form):
+    """class of creating new post using modelform"""
+
+    name = forms.CharField(widget=forms.TextInput(attrs={"class": "validate"}))
+    surname = forms.CharField(widget=forms.TextInput(attrs={"class": "validate"}))
+    patronymic = forms.CharField(widget=forms.TextInput(attrs={"class": "validate"}))
+    discount = forms.CharField(required=False, widget=forms.TextInput())
+    email = forms.CharField(widget=forms.TextInput(attrs={"class": "validate"}))
+    # date = forms.DateField(
+    #     widget=DatePickerInput(format='%m/%d/%Y')
+    # )

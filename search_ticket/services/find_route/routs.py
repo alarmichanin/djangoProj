@@ -23,5 +23,4 @@ def get_routs_according_to_direction(start_point, end_point):
 
 def get_station_by_name(station_name):
 
-    ic(Station.objects.filter(name=station_name).first())
     return Station.objects.filter(name=station_name).first()

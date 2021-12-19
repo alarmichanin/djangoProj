@@ -5,6 +5,48 @@
 {% endblock link %}
 
 {% block content %}
-  GREAt
-  {{title}}
+  <form action="" method="POST" >
+    {% csrf_token %}
+    <div class="row search-tickets-container" style="background: green;">
+      <div class="input-field col s4">
+          <label for="{{form.name.id_for_label}}" class="active">name</label>
+          {{form.name}}
+          <div class="form-error">
+              {{form.name.errors}}
+          </div>
+      </div>
+      <div class="input-field col s4">
+          <label for="{{form.surname.id_for_label}}" class="active">surname</label>
+          {{form.surname}}
+          <div class="form-error">
+              {{form.surname.errors}}
+          </div>
+      </div>
+      <div class="input-field col s4">
+          <label for="{{form.patronymic.id_for_label}}" class="active">patronymic</label>
+          {{form.patronymic}}
+          <div class="form-error">
+              {{form.patronymic.errors}}
+          </div>
+      </div>
+      <div class="input-field col s4">
+          <label for="{{form.discount.id_for_label}}" class="active">discount</label>
+          {{form.discount}}
+          <div class="form-error">
+              {{form.discount.errors}}
+          </div>
+      </div>
+      <div class="input-field col s4">
+          <label for="{{form.email.id_for_label}}" class="active">email</label>
+          {{form.email}}
+          <div class="form-error">
+              {{form.email.errors}}
+          </div>
+      </div>
+      <div class="search-btn">
+          <button type="submit" name="submit_button" class="btn waves-effect waves-light btn-large">order</button>
+      </div>
+
+    </div>
+  </form>
 {% endblock content %}

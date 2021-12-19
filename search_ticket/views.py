@@ -8,9 +8,8 @@ from search_ticket.services.find_route.routs import (
 )
 from search_ticket.utils import DataMixin
 from django.contrib import messages
-from search_ticket.models import Route, RouteStation
+from search_ticket.models import RouteStation
 from .forms import SearchRouteForm
-from icecream import ic
 
 # Create your views here.
 
@@ -25,7 +24,15 @@ def get_home_page(request):
             request.session["start_point"] = form.cleaned_data["start_point"]
             request.session["end_point"] = form.cleaned_data["end_point"]
             request.session["date"] = request.POST["date"]
-            return HttpResponseRedirect(reverse("get_avaluable_routs"))
+            return HttpResponseRedirect(
+                reverse(
+                    "get_avaluable_routs",
+                    kwargs={
+                        "start": form.cleaned_data["start_point"],
+                        "end": form.cleaned_data["end_point"],
+                    },
+                )
+            )
         else:
             messages.add_message(
                 request,
@@ -53,16 +60,16 @@ class AvaluableRouts(DataMixin, ListView):
     def get_queryset(self):
 
         result = get_routs_according_to_direction(
-            get_station_by_name(self.request.session["start_point"]),
-            get_station_by_name(self.request.session["end_point"]),
+            get_station_by_name(self.kwargs["start"]),
+            get_station_by_name(self.kwargs["end"]),
         )
         return RouteStation.objects.filter(route__in=result)
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)  # like dynamic list
         c_def = self.get_user_context(
-            start_point=self.request.session["start_point"],
-            end_point=self.request.session["end_point"],
+            start=self.kwargs["start"],
+            end=self.kwargs["end"],
         )
         return dict(list(context.items()) + list(c_def.items()))
 

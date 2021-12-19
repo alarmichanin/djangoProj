@@ -59,7 +59,14 @@ class Train(models.Model):
 
     number_of_railcar = models.IntegerField("number of railcar")
     name = models.CharField(max_length=150, null=True)
-
+    slug = models.SlugField(
+        max_length=255,
+        unique=True,
+        db_index=True,
+        verbose_name="URL",
+        null=True,
+        blank=True,
+    ) 
     def __str__(self) -> str:
         return f"{self.name} - {self.number_of_railcar}"
 

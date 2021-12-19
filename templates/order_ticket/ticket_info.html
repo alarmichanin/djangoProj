@@ -1,0 +1,14 @@
+{% extends "../booking/base.html" %}
+
+
+{% block content %}
+  {{ordered_ticket.customer_name}}
+  {{ordered_ticket.customer_surname}}
+  {{ordered_ticket.customer_patronymic}}
+  {{ordered_ticket.start_point}}
+  {{ordered_ticket.end_point}}
+  {{ordered_ticket.price}}
+
+  
+  {# <a href="{% url 'order_railcar' route_slug  %}">BUTTON</a> #}
+{% endblock content %}
