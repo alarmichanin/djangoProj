@@ -1,52 +1,53 @@
 {% extends "../booking/base.html" %}
 
 {% block link %}
-	<title>{{title}}</title>
+<title>{{title}}</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'order_ticket/css/order_ticket.css' %}">
 {% endblock link %}
 
 {% block content %}
-  <form action="" method="POST" >
+<form action="" method="POST" class="col s12">
     {% csrf_token %}
-    <div class="row search-tickets-container" style="background: green;">
-      <div class="input-field col s4">
-          <label for="{{form.name.id_for_label}}" class="active">name</label>
-          {{form.name}}
-          <div class="form-error">
-              {{form.name.errors}}
-          </div>
-      </div>
-      <div class="input-field col s4">
-          <label for="{{form.surname.id_for_label}}" class="active">surname</label>
-          {{form.surname}}
-          <div class="form-error">
-              {{form.surname.errors}}
-          </div>
-      </div>
-      <div class="input-field col s4">
-          <label for="{{form.patronymic.id_for_label}}" class="active">patronymic</label>
-          {{form.patronymic}}
-          <div class="form-error">
-              {{form.patronymic.errors}}
-          </div>
-      </div>
-      <div class="input-field col s4">
-          <label for="{{form.discount.id_for_label}}" class="active">discount</label>
-          {{form.discount}}
-          <div class="form-error">
-              {{form.discount.errors}}
-          </div>
-      </div>
-      <div class="input-field col s4">
-          <label for="{{form.email.id_for_label}}" class="active">email</label>
-          {{form.email}}
-          <div class="form-error">
-              {{form.email.errors}}
-          </div>
-      </div>
-      <div class="search-btn">
-          <button type="submit" name="submit_button" class="btn waves-effect waves-light btn-large">order</button>
-      </div>
-
+    <div class="search-tickets-container">
+        <div class="input-field col s6">
+            <label for="{{form.name.id_for_label}}" class="active"><i class="material-icons small">account_circle</i>Name</label>
+            {{form.name}}
+            <div class="form-error">
+                {{form.name.errors}}
+            </div>
+        </div>
+        <div class="input-field col s6">
+            <label for="{{form.surname.id_for_label}}" class="active"><i class="material-icons small">account_circle</i>Surname</label>
+            {{form.surname}}
+            <div class="form-error">
+                {{form.surname.errors}}
+            </div>
+        </div>
+        <div class="input-field col s12">
+            <label for="{{form.patronymic.id_for_label}}" class="active"><i class="material-icons small">account_circle</i>Patronymic</label>
+            {{form.patronymic}}
+            <div class="form-error">
+                {{form.patronymic.errors}}
+            </div>
+        </div>
+        <div class="input-field col s6">
+            <label for="{{form.email.id_for_label}}" class="active"><i class="material-icons small">email</i>Email</label>
+            {{form.email}}
+            <div class="form-error">
+                {{form.email.errors}}
+            </div>
+        </div>
+        <div class="input-field col s6">
+            <label for="{{form.discount.id_for_label}}" cclass="active"><i class="material-icons small">attachment</i>Discount</label>
+            {{form.discount}}
+            <div class="form-error">
+                {{form.discount.errors}}
+            </div>
+        </div>
+        <div class="search-btn">
+            <button type="submit" name="submit_button" class="btn waves-effect waves-light btn-large btn">order</button>
+        </div>
     </div>
-  </form>
+</form>
 {% endblock content %}
