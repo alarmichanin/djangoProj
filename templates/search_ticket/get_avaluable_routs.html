@@ -6,20 +6,24 @@
 {% endblock %}
 
 {% block content %}
-<div>
-  <h5>Found routes from {{start}} to {{end}}</h5>
-</div>
+<div class="container-routes">
+  <div>
+    <span class="routes-point">Found routes:<i class="material-icons tiny">place</i>{{start}} <i class="material-icons tiny">arrow_forward</i> <i class="material-icons tiny">place</i>{{end}}</span>
+  </div>
 
-{% for rout in all_routs %}
-<div class="contant train-container">
-  {% load static %}
-  <img class="train-container-img" src="{% static 'search_ticket/img/DIESEL.png' %}" alt="Train">
-  <p class="train-container-name">{{rout.route}}</p>
-  <div class="train-container-buy">
-    <a class="justify-content-end waves-effect waves-light btn btn-buy"
-    href="{% url 'order_train' start=start end=end  rout_slug=rout.route.slug %}"><i class="material-icons left">attach_money</i>Buy
-    ticket</a>
+  <div class="container-routes-get">
+    {% for rout in all_routs %}
+    <div class="contant train-container">
+      {% load static %}
+      <img class="train-container-img" src="{% static 'search_ticket/img/DIESEL.png' %}" alt="Train">
+      <p class="train-container-name">{{rout.route}}</p>
+      <div class="train-container-buy">
+        <a class="justify-content-end waves-effect waves-light btn btn-buy"
+        href="{% url 'order_train' start=start end=end  rout_slug=rout.route.slug %}"><i class="material-icons left">attach_money</i>Buy
+        ticket</a>
+      </div>
+    </div>
+    {% endfor %}
   </div>
 </div>
-{% endfor %}
 {% endblock content %}

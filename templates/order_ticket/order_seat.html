@@ -1,15 +1,41 @@
 {% extends "../booking/base.html" %}
 
 
+{% block link %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'order_ticket/css/order_seat.css' %}">
+{% endblock %}
+
 {% block content %}
-  SEAT
-  {% for elem in seats %}
-    {{elem}}
-  {% endfor %}
-  <form action="{% url 'order_seat' start end route_slug train railcar  %}" method="POST">
+<p class="railcar-title">
+  Railcar-scheme
+</p>
+<div class="container railcar-scheme">
+  {% load static %}
+  <img class="railcar-img" src="{% static 'order_ticket/img/railcar.png' %}" alt="Railcar">
+</div>
+
+<div class="choose-railcar-container">
+  <p class="choose-title">
+    Choose seat:
+  </p>
+  <div class="railcar-container">
+    {% for elem in seats %}
+    <div class="railcar">
+      <span class="railcar-number" id="railcar-number">
+        {{elem}}
+      </span>
+    </div>
+    {% endfor %}
+  </div>
+  <form action="{% url 'order_seat' start end route_slug train railcar  %}" method="POST" class="choose-railcar-form">
     {% csrf_token %}
-    <input type="text" name="seat" id="id">
-    <button type="submit" >sibmit</button>
-  </form>  
+    <div class="input-container row">
+      <label class="" for="choose-railcar">Choosed seat:</label>
+      <input type="text" name="seat" id="choose-railcar" class="">
+      <button type="submit" class="waves-effect waves-light btn">submit</button>
+    </div>
+  </form>
   {# <a href="{% url 'order_railcar' route_slug  %}">BUTTON</a> #}
+</div>
 {% endblock content %}

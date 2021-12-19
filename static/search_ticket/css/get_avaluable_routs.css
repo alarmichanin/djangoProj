@@ -1,5 +1,6 @@
 :root {
     --color-white: #ffffff;
+    --color-ligth-white: #ffffffbb;
     --color-dark: #111111;
     --color-ligth-green: rgba(2, 192, 130, .75);
 }
@@ -7,9 +8,11 @@
 .train-container {
     background-color: var(--color-ligth-green);
     display: flex;
+
     padding: 30px;
     margin-bottom: 20px;
     border-radius: 15px;
+
     color: var(--color-dark);
 }
 
@@ -45,4 +48,27 @@
     font-weight: 600;
     border-radius: 15px;
     background: #ffd600;
+}
+
+.container-routes {
+    width: 100%;
+
+    border-radius: 20px;
+
+    padding: 20px;
+    background-color: var(--color-ligth-white);
+}
+
+.container-routes-get {
+    margin-top: 10px;
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.routes-point {
+    color: var(--color-dark);
+    font-size: 15px;
+    background-color: var(--color-white);
+    padding: 5px;
+    border-radius: 10px;
 }

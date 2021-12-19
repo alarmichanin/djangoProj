@@ -1,0 +1,107 @@
+:root {
+    --color-white: #ffffff;
+    --color-ligth-white: #ffffffbb;
+    --color-dark: #111111;
+    --color-ligth-green: rgba(2, 192, 130, .75);
+    --color-red: rgb(231, 55, 42);
+    --color-sky: #F9FBFD;
+}
+
+.railcar-scheme {
+    width: 100%;
+    overflow-x: scroll;
+    background-color: var(--color-sky);
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.choose-railcar-container {
+    background-color: var(--color-ligth-green);
+
+    padding: 30px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+
+    color: var(--color-white);
+}
+
+.railcar-container {
+    width: 100%;
+    height: 140px;
+    margin-top: 20px;
+    display: flex;
+    overflow-y: scroll;
+    flex-wrap: nowrap;
+}
+
+.railcar {
+    width: 200px;
+    height: 90px;
+    position: relative;
+    display: inline-block;
+    background-color: var(--color-ligth-white);
+    padding: 10px;
+    margin: 15px;
+    border-radius: 20px;
+    border: 2px solid var(--color-ligth-green);
+    cursor: pointer;
+}
+
+.railcar:hover {
+    background-color: var(--color-white);
+}
+
+.railcar-number {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+    top: -10px;
+    left: -10px;
+    background-color: var(--color-dark);
+}
+
+.railcar-img {
+    width: auto;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+}
+
+.choose-title, .railcar-title {
+    color: var(--color-dark);
+    font-size: 15px;
+    background-color: var(--color-white);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.railcar-title {
+    width: 200px;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.choose-railcar-form {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 20px;
+    color: var(--color-dark);
+    font-size: 15px;
+    background-color: var(--color-white);
+    padding: 10px;
+    border-radius: 10px;
+}
