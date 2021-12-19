@@ -28,9 +28,12 @@
                 </div>
 
                 <div class="input-field col s4">
-                    <input required id="signup-birthday" name="date" type="text" class="datepicker">
+                    <!-- <input required id="signup-birthday" name="date" type="text" class="datepicker"> -->
                     <label class="active" for="date"><i class="material-icons">date_range</i>Date</label>
-                    <!-- {{date}} -->
+                    {{form.date}}
+                    <div class="form-error">
+                        {{form.date.errors}}
+                    </div>
                     
                 </div> 
 

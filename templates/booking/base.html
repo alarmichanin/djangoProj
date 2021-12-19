@@ -33,12 +33,12 @@
 						<span class="logo-title">KING</span>
 					</h1>
 				</a>
-				<div class="nav-burger-menu">
+				<div class="nav-burger-menu" id="nav-burger-menu">
 					<span class="nav-burger-menu-row"></span>
 					<span class="nav-burger-menu-row"></span>
 					<span class="nav-burger-menu-row"></span>
 				</div>
-				<ul class="nav-list">
+				<ul class="nav-list" id="nav-list">
 					<li class="nav-list-item">
 						<a href="{% url 'about_view' %}">About</a>
 					</li>
@@ -68,35 +68,37 @@
 			<h1>search your tickets online</h1>
 		</div>
 
-		<div class="messages">
-					{% if messages %}
-						{% for message in messages %}
-							{% if message.tags == 'error' %}
-								<div class="alert alert-danger" role="alert">
-								  {{message}}
-								</div>
-							{% elif message.tags == 'critical' %}
-							<div class="alert alert-primary" role="alert">
-								{{message}}
-							  </div>
-							{% else %}
-								<div class="alert alert-{{message.tags}}" role="alert">
-								  {{message}}
-								</div>
-							{% endif %}	
-						{% endfor %}
-					{% endif %}
-				</div>
-
 		{% block content %}
 
 		{% endblock content %}
+
+		<ul class="collapsible collapsible-text">
+			<li>
+				<div class="collapsible-header">
+					<i class="material-icons">warning</i>
+							  Important info</div>
+				<div class="collapsible-body">
+					<span>According to the decree of the Cabinet of Ministers of Ukraine to board any train starting from 21.10.2021 all passengers over 18 years of age need to provide vaccination certificate or COVID-19 negative test (valid for 72 hours) or COVID-certificate of recovery (using the application Diia only) .
+					Additional requirements for foreign travelers may apply.
+					Let's care about each other's safety!
+					<br><br>
+					Tickets purchased online (if the ticket was not printed out at the railway ticket office) can be returned
+					in the "Ticket return" section of the users account after the registration.
+					<br><br>
+					Payments for the returned electronic tickets are automatically refunded to a bank card within a 30 days period.
+					Here you can buy tickets for 1000 UAH of state aid for vaccinated citizens!</span>
+				</div>
+			</li>
+		</ul>
 	</div>
 	{% load static %}
 	<script src="{% static 'base/js/materialize.min.js' %}"></script>
 	<script src="{% static 'base/js/base.js' %}"></script>
 	<script src="{% static 'search_ticket/js/home_page.js' %}"></script>
 	<script src="{% static 'base/js/testimonials.js' %}"></script>
+	<script src="{% static 'order_ticket/js/choose_place.js' %}"></script>
+	<script src="{% static 'order_ticket/js/order_seat.js' %}"></script>
+	<script src="{% static 'order_ticket/js/order_ticket.js' %}"></script>
 </body>
 
-</html>	
+</html>
