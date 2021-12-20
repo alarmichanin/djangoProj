@@ -112,9 +112,7 @@ def order_seat(request, start, end, rout_slug, train, railcar):
     if request.method == "POST":
         seat = request.POST.get("seat")
         try:
-            if int(seat) not in range(
-                1,
-                Railcar.objects.first().amount_of_seats):
+            if int(seat) not in range(1, Railcar.objects.first().amount_of_seats):
                 raise ValueError
         except Exception:
             messages.add_message(
