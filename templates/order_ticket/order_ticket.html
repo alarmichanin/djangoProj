@@ -11,35 +11,40 @@
     {% csrf_token %}
     <div class="search-tickets-container">
         <div class="input-field col s6">
-            <label for="{{form.name.id_for_label}}" class="active"><i class="material-icons small">account_circle</i>Name</label>
+            <i class="material-icons prefix">account_circle</i>
+            <label for="{{form.name.id_for_label}}" class="active">Name</label>
             {{form.name}}
             <div class="form-error">
                 {{form.name.errors}}
             </div>
         </div>
         <div class="input-field col s6">
-            <label for="{{form.surname.id_for_label}}" class="active"><i class="material-icons small">account_circle</i>Surname</label>
+            <i class="material-icons prefix">account_circle</i>
+            <label for="{{form.surname.id_for_label}}" class="active">Surname</label>
             {{form.surname}}
             <div class="form-error">
                 {{form.surname.errors}}
             </div>
         </div>
         <div class="input-field col s12">
-            <label for="{{form.patronymic.id_for_label}}" class="active"><i class="material-icons small">account_circle</i>Patronymic</label>
+            <i class="material-icons prefix">account_circle</i>
+            <label for="{{form.patronymic.id_for_label}}" class="active">Patronymic</label>
             {{form.patronymic}}
             <div class="form-error">
                 {{form.patronymic.errors}}
             </div>
         </div>
         <div class="input-field col s6">
-            <label for="{{form.email.id_for_label}}" class="active"><i class="material-icons small">email</i>Email</label>
+            <i class="material-icons prefix">email</i>
+            <label for="{{form.email.id_for_label}}" class="active">Email</label>
             {{form.email}}
             <div class="form-error">
                 {{form.email.errors}}
             </div>
         </div>
         <div class="input-field col s6">
-            <label for="{{form.discount.id_for_label}}" cclass="active"><i class="material-icons small">attachment</i>Discount</label>
+            <i class="material-icons prefix">attachment</i>
+            <label for="{{form.discount.id_for_label}}" cclass="active">Discount</label>
             {{form.discount}}
             <div class="form-error">
                 {{form.discount.errors}}
