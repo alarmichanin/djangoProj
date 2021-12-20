@@ -16,11 +16,14 @@ def get_routs_according_to_direction(start_point, end_point):
             RouteStation.objects.filter(stations__name=end_point.name),
         )
     ):
-        if (
-            i.stations.get(name=start_point.name).id
-            < i.stations.get(name=end_point.name).id
+        if i.stations.filter(name=start_point.name) and i.stations.filter(
+            name=end_point.name
         ):
-            storage.append(i.route)
+            if (
+                i.stations.get(name=start_point.name).id
+                < i.stations.get(name=end_point.name).id
+            ):
+                storage.append(i.route)
     return storage
 
 
