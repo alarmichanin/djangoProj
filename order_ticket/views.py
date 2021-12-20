@@ -16,13 +16,15 @@ from django.views.generic.edit import FormView
 from django.shortcuts import render
 from django.urls import reverse
 from order_ticket.forms import OrderTicketForm
+from icecream import ic
 from django.contrib import messages
+from order_ticket.models import Railcar
 
 
 def order_train(request, start, end, rout_slug):
 
     if request.method == "POST":
-        train = request.POST.get("train")
+        train = request.POST.get("train").strip()
         return HttpResponseRedirect(
             reverse(
                 "order_railcar",
@@ -37,7 +39,7 @@ def order_train(request, start, end, rout_slug):
     available_trains = Ticket.objects.filter(
         route=Route.objects.get(slug=rout_slug), is_taken=False
     )
-    available_trains = {elem.train.slug for elem in available_trains}
+    available_trains = {elem.train for elem in available_trains}
     return render(
         request,
         "order_ticket/order_train.html",
@@ -66,15 +68,31 @@ def order_railcar(request, start, end, rout_slug, train):
                 },
             )
         )
-
-    available_reilcars = {
-        elem.railcar_number
-        for elem in Ticket.objects.filter(
-            route=Route.objects.get(slug=rout_slug),
-            train=Train.objects.get(slug=train),
-            is_taken=False,
+    try:
+        available_reilcars = {
+            elem.railcar_number
+            for elem in Ticket.objects.filter(
+                route=Route.objects.get(slug=rout_slug),
+                train=Train.objects.get(slug=train),
+                is_taken=False,
+            )
+        }
+    except Exception:
+        messages.add_message(
+            request,
+            messages.ERROR,
+            "there is no such train on this direction",
         )
-    }
+        return HttpResponseRedirect(
+            reverse(
+                "order_train",
+                kwargs={
+                    "start": start,
+                    "end": end,
+                    "rout_slug": rout_slug,
+                },
+            )
+        )
 
     return render(
         request,
@@ -93,6 +111,29 @@ def order_seat(request, start, end, rout_slug, train, railcar):
 
     if request.method == "POST":
         seat = request.POST.get("seat")
+        try:
+            if int(seat) not in range(
+                1,
+                Railcar.objects.first().amount_of_seats):
+                raise ValueError
+        except Exception:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                "Invalid number of seats",
+            )
+            return HttpResponseRedirect(
+                reverse(
+                    "order_seat",
+                    kwargs={
+                        "start": start,
+                        "end": end,
+                        "rout_slug": rout_slug,
+                        "train": train,
+                        "railcar": railcar,
+                    },
+                )
+            )
         return HttpResponseRedirect(
             reverse(
                 "order_ticket",
@@ -107,15 +148,39 @@ def order_seat(request, start, end, rout_slug, train, railcar):
             )
         )
 
-    available_seats = {
-        elem.seat
-        for elem in Ticket.objects.filter(
-            route=Route.objects.get(slug=rout_slug),
-            train=Train.objects.get(slug=train),
-            railcar_number=railcar,
-            is_taken=False,
+    try:
+        available_seats = {
+            elem.seat
+            for elem in Ticket.objects.filter(
+                route=Route.objects.get(slug=rout_slug),
+                train=Train.objects.get(slug=train),
+                railcar_number=int(railcar),
+                is_taken=False,
+            )
+        }
+        if int(railcar) not in range(
+            1, Train.objects.get(slug=train).number_of_railcar
+        ):
+            raise ValueError
+
+    except Exception:
+
+        messages.add_message(
+            request,
+            messages.ERROR,
+            "there is no such railcar on this direction",
         )
-    }
+        return HttpResponseRedirect(
+            reverse(
+                "order_railcar",
+                kwargs={
+                    "start": start,
+                    "end": end,
+                    "rout_slug": rout_slug,
+                    "train": train,
+                },
+            )
+        )
 
     return render(
         request,
@@ -155,7 +220,7 @@ class OrderTicket(FormView):
                     messages.add_message(request, messages.ERROR, "discount is invalid")
                     return HttpResponseRedirect(
                         reverse(
-                            "order_tiket",
+                            "order_ticket",
                             kwargs={
                                 "start": start,
                                 "end": end,
@@ -227,5 +292,5 @@ class TicketInfo(TemplateView):
         ip = self.kwargs["ip"]
 
         ordered_ticket = get_ordered_ticket(ticket_id, ip)
-        context = {"ordered_ticket" : ordered_ticket}
+        context = {"ordered_ticket": ordered_ticket}
         return context

@@ -6,6 +6,9 @@ from icecream import ic
 def get_routs_according_to_direction(start_point, end_point):
     """finds routs according to stations that there are
     in each route"""
+
+    if not (start_point or end_point):
+        raise ValueError
     storage = []
     for i in list(
         chain(
@@ -23,4 +26,5 @@ def get_routs_according_to_direction(start_point, end_point):
 
 def get_station_by_name(station_name):
 
+    ic(Station.objects.filter(name=station_name).first())
     return Station.objects.filter(name=station_name).first()

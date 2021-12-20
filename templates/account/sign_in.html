@@ -1,0 +1,50 @@
+{% extends "../booking/base.html" %}
+{% load static %}
+
+{% block link %}
+        <link rel="icon" type="" href="{% static 'menu/img/ico/gome_gr.png' %}">
+        <title>Sign in</title>
+</head>
+
+
+
+    {% endblock %}
+    
+
+{% block content %}
+
+<div class="wrap_form">
+    <div class="form_body">
+        <h2 class="form__header">Sign in</h2>
+        <h5 class="form__desctiption">
+            Enter to your account. It takes only a minute
+        </h5>
+
+        <form action="" method="post" class="form_registr">
+
+            {% csrf_token %}
+            <div class="form-group-usual">
+                <label for="{{form.username.id_for_label}}">User name</label>
+                {{form.username}}
+                <div class="form-error">
+                    {{form.username.errors}}
+                </div>
+            </div>  
+
+            <div class="form-group-usual">
+                <label for="{{form.password.id_for_label}}">Password</label>
+                {{form.password}}
+                <div class="form-error">
+                    {{form.password.errors}}
+                </div>
+            </div>
+            <div class="button__body">
+                <button type="submit" name="submit_button" class="btn btn-success btn-block ">Sign in</button> 
+            </div>
+        </form>
+    </div>  
+</div>
+      
+
+
+{% endblock %}

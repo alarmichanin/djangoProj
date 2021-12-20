@@ -62,11 +62,32 @@
 		</nav>
 	</header>
 
+	
+
 	<div class="container">
 
 		<div class="search-tickets-title">
 			<h1>search your tickets online</h1>
 		</div>
+		<div class="messages">
+		{% if messages %}
+			{% for message in messages %}
+				{% if message.tags == 'error' %}
+					<div class="alert alert-danger" style="color:red;" role="alert">
+					  {{message}}
+					</div>
+				{% elif message.tags == 'critical' %}
+				<div class="alert alert-primary" role="alert">
+					{{message}}
+				  </div>
+				{% else %}
+					<div class="alert alert-success" style="color:green;" role="alert">
+					  {{message}}
+					</div>
+				{% endif %}	
+			{% endfor %}
+		{% endif %}
+	</div>
 
 		{% block content %}
 

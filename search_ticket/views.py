@@ -10,6 +10,7 @@ from search_ticket.utils import DataMixin
 from django.contrib import messages
 from search_ticket.models import RouteStation
 from .forms import SearchRouteForm
+from icecream import ic
 
 # Create your views here.
 
@@ -36,7 +37,7 @@ def get_home_page(request):
         else:
             messages.add_message(
                 request,
-                messages.Error,
+                messages.ERROR,
                 "Some problems came out, fix them and try again",
             )
     else:
@@ -59,19 +60,22 @@ class AvaluableRouts(DataMixin, ListView):
 
     def get_queryset(self):
 
-        result = get_routs_according_to_direction(
-            get_station_by_name(self.kwargs["start"]),
-            get_station_by_name(self.kwargs["end"]),
-        )
-        return RouteStation.objects.filter(route__in=result)
+        try:
+            result = get_routs_according_to_direction(
+                get_station_by_name(self.kwargs["start"]),
+                get_station_by_name(self.kwargs["end"]),
+            )
+        except Exception:
+            return []
+        else:
+            return RouteStation.objects.filter(route__in=result)
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)  # like dynamic list
-        c_def = self.get_user_context(
-            start=self.kwargs["start"],
-            end=self.kwargs["end"],
-        )
-        return dict(list(context.items()) + list(c_def.items()))
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context["start"] = self.kwargs["start"]
+        context["end"] = self.kwargs["end"]
+        return context
 
 
 class AboutView(DataMixin, TemplateView):

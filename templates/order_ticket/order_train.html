@@ -12,7 +12,7 @@
   <div class="container-verifi-code">
     {% for train in trains %}
     <span>
-      {{train}}
+      {{train.slug}}
     </span>
   {% endfor %}
   </div>
@@ -20,7 +20,7 @@
     {% csrf_token %}
     <div class="col s8">
       <input type="text" name="train" id="id">
-      <p>*write the code you see above</p>
+      <p>*chose train from above</p>
     </div>
     <button type="submit" class="waves-effect waves-light btn col s4">send</button>
   </form>  

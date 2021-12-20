@@ -55,3 +55,5 @@ def create_customer_ticket(
 def get_ordered_ticket(ticket_id, ip):
 
     return OrderTicket.objects.get(ticket=Ticket.objects.get(id=ticket_id), ip=ip)
+
+

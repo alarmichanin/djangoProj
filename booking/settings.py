@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-_2zf2g2i)@)q^-_-xl59%lh+u4#@%2xb3z4i8rdlc0q4itg8zo
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "home"
 
 # Application definition
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "search_ticket",
     "order_ticket",
+    "account",
     "bootstrap4",       
     "bootstrap_datepicker_plus"
 ]
