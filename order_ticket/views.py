@@ -21,14 +21,12 @@ from order_ticket.models import Railcar
 # <<<<<<< Updated upstream
 from order_ticket.services.database.order_seat import fill_tickets
 from order_ticket.services.order_ticket import NUMBER_OF_SEATS
-# =======
 from order_ticket.services.database.order_places import (
     fill_tickets,
     get_available_seats,
     get_available_trains,
     get_available_railcars
 )
-# >>>>>>> Stashed changes
 
 
 def order_train(request, start, end, rout_slug):
