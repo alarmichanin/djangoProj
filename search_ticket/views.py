@@ -8,7 +8,10 @@ from search_ticket.services.find_route.routs import (
 )
 from search_ticket.utils import DataMixin
 from django.contrib import messages
-from search_ticket.models import RouteStation
+from search_ticket.models import RouteStation, Route
+from order_ticket.models import Ticket
+from order_ticket.services.database.order_seat import fill_tickets
+
 from .forms import SearchRouteForm
 from icecream import ic
 
@@ -16,8 +19,10 @@ from icecream import ic
 
 
 def get_home_page(request):
-
+    # if not Ticket.objects.all():
+    #     fill_tickets()
     if request.method == "POST":
+
         form = SearchRouteForm(request.POST)
 
         if form.is_valid():
@@ -65,8 +70,10 @@ class AvaluableRouts(DataMixin, ListView):
                 get_station_by_name(self.kwargs["start"]),
                 get_station_by_name(self.kwargs["end"]),
             )
-        except Exception:
+        except Exception as e:
+            print(e)
             return []
+
         else:
             return RouteStation.objects.filter(route__in=result)
 

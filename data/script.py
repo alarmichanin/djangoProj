@@ -6,63 +6,80 @@ citiesArr = ["./stations/kyivData.json", "./stations/dniproData.json", "./statio
 stations = "./stations.json"
 trains = "./trains.json"
 routes = "./routes.json"
+routeStations = "./routeStations.json"
 
 stationsArr = []
+stationsForEveryRoute = []
 trainsStart = []
 trainsEnd = []
+
+objArr = []
+index = 0
 for city in citiesArr:
     with open(city, 'r', encoding='utf-8') as f:
         templates = json.load(f)
     # for appending start and end points
     for key, value in templates[0].items():
-        trainsStart.append(value[0])
-        trainsEnd.append(value[len(value) - 1])
-    # for appending stations
-    for i in range(0, len(templates)):
-        for key, value in templates[i].items():
-            for elem in value:
-                if not (elem in stationsArr):
-                    stationsArr.append(elem)
+        obj = {}
+        # value - arr of routes
+        index += 1
+        obj['id'] = index
+        obj['route'] = value
+        objArr.append(obj)
 
-with open(trains, 'w', encoding='utf8') as tr:
-    templatesTr = []
-    for index, item in enumerate(trainsStart, start=1):
-        schema = {
-            "model": "search_ticket.Train",
-            "pk": index,
-            "fields": {
-                "name": f'{item}-{trainsEnd[index - 1]}',
-                "number_of_railcar": random.randint(15, 30)
+with open(routeStations, 'w', encoding='utf8') as rtSt:
+    templatesRtSt = []
+    pkStations = 1
+    pkSchema = 0
+    for o in objArr:
+        pkSchema += 1
+        templatesOfStations = []
+        for every in o["route"]:
+            objStation = {"pk": pkStations, "fields": {}, "model": "search_ticket.Station"}
+            objStation["fields"]["name"] = every
+            pkStations += 1
+            templatesOfStations.append(objStation)
+        schema = [
+            *templatesOfStations,
+            {
+                "pk": pkSchema,
+                "model": "search_ticket.Route",
+                "fields": {
+                    "start_point": [elem["pk"] for elem in templatesOfStations][0],
+                    "end_point": [elem["pk"] for elem in templatesOfStations][len([elem["pk"] for elem in templatesOfStations])-1],
+                    "slug": f'{[elem["pk"] for elem in templatesOfStations][0]}-{[elem["pk"] for elem in templatesOfStations][len([elem["pk"] for elem in templatesOfStations])-1]}'
+                }
+            },
+            {
+                "pk": pkSchema,
+                "model": "search_ticket.RouteStation",
+                "fields":
+                    {
+                        "route": pkSchema,
+                        "stations": [elem["pk"] for elem in templatesOfStations],
+                        "time": "17:41:28",
+                        "price_from_start": random.randint(100, 300)
+                    }
+            },
+            {
+                "pk": pkSchema,
+                "model": "search_ticket.RoutTrain",
+                "fields":
+                    {
+                        "route": pkSchema,
+                        "train": [pkSchema]
+                    }
+            },
+            {
+                "pk": pkSchema,
+                "model": "search_ticket.Train",
+                "fields":
+                    {
+                        "number_of_railcar": random.randint(15, 30),
+                        "name": f'{o["route"][0]}-{o["route"][len(templatesOfStations) - 1]}',
+                        "slug": f'{[elem["pk"] for elem in templatesOfStations][0]}-{[elem["pk"] for elem in templatesOfStations][len([elem["pk"] for elem in templatesOfStations])-1]}'
+                    }
             }
-        }
-        templatesTr.append(schema)
-    json.dump(templatesTr, tr, ensure_ascii=False)
-
-with open(routes, 'w', encoding='utf8') as rt:
-    templatesRt = []
-    for index, item in enumerate(trainsStart, start=1):
-        schema = {
-            "model": "search_ticket.Route",
-            "pk": index,
-            "fields": {
-                "start_point": item,
-                "end_point": trainsEnd[index - 1],
-                "rout_train": 1,
-                "rout_station": 1
-            }
-        }
-        templatesRt.append(schema)
-    json.dump(templatesRt, rt, ensure_ascii=False)
-
-with open(stations, 'w', encoding='utf8') as st:
-    templatesSt = []
-    for index, item in enumerate(stationsArr, start=1):
-        schema = {
-            "model": "search_ticket.Station",
-            "pk": index,
-            "fields": {
-                "name": item
-            }
-        }
-        templatesSt.append(schema)
-    json.dump(templatesSt, st, ensure_ascii=False)
+        ]
+        templatesRtSt += schema
+    json.dump(templatesRtSt, rtSt, ensure_ascii=False)

@@ -1,14 +1,35 @@
 {% extends "../booking/base.html" %}
 
 
-{% block content %}
-  {{ordered_ticket.customer_name}}
-  {{ordered_ticket.customer_surname}}
-  {{ordered_ticket.customer_patronymic}}
-  {{ordered_ticket.start_point}}
-  {{ordered_ticket.end_point}}
-  {{ordered_ticket.price}}
+{% block link %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'order_ticket/css/ticket_info.css' %}">
+{% endblock %}
 
-  
-  {# <a href="{% url 'order_railcar' route_slug  %}">BUTTON</a> #}
+{% block content %}
+<div class="register-container row">
+  <div class="form-title">
+    <h4 class="form-header">Ticket info</h4>
+  </div>
+
+  <div class="form-container col s6">
+    <div class="search-tickets-container row">
+      <ul class="collection">
+        <li class="collection-item">Full name:
+          {{ordered_ticket.customer_name}} {{ordered_ticket.customer_surname}} {{ordered_ticket.customer_patronymic}}
+        </li>
+        <li class="collection-item">
+            Route:<i class="material-icons tiny">place</i>{{ordered_ticket.start_point}} <i
+                class="material-icons tiny">arrow_forward</i> <i
+                class="material-icons tiny">place</i>{{ordered_ticket.end_point}}
+        </li>
+        <li class="collection-item">
+          Price: {{ordered_ticket.price}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+{# <a href="{% url 'order_railcar' route_slug  %}">BUTTON</a> #}
 {% endblock content %}

@@ -68,7 +68,7 @@ class Train(models.Model):
         blank=True,
     ) 
     def __str__(self) -> str:
-        return f"{self.name} - {self.number_of_railcar}"
+        return f"{self.name} - {self.slug}"
 
 
 class RoutTrain(models.Model):

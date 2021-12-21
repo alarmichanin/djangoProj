@@ -1,6 +1,7 @@
 :root {
   --color-white: #ffffff;
   --color-dark: #111111;
+  --color-ligth-grey: #323232b9;
   --color-green: rgba(2, 192, 130, .75);
   --color-red: rgba(240, 37, 37, 0.75);
 }
@@ -290,4 +291,25 @@ a {
   font-size: 13px;
   color: var(--color-red);
   background-color: var(--color-white);
+}
+
+.messages {
+  display: flex;
+  justify-content: center;
+
+  width: 300px;
+
+  position: absolute;
+  top: 90px;
+  right: 30px;
+  padding: 10px 25px;
+  border-radius: 15px;
+
+  background-color: var(--color-ligth-grey);
+  box-shadow: 4px 8px 20px -4px rgba(165, 179, 189, 0.2);
+  
+  font-size: 1.1rem;
+  font-weight: 600;
+
+  transition: 0.5s all ease;
 }

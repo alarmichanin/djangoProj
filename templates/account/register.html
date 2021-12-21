@@ -1,81 +1,94 @@
 {% extends "../booking/base.html" %}
 {% load static %}
 
-	{% block link %}
-	   	<link rel="icon" type="" href="{% static ico %}">
-	   	<title>{{title}}</title>
-	{% endblock %}
+{% block link %}
+<link rel="icon" type="" href="{% static ico %}">
+<title>{{title}}</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'account/css/register.css' %}">
+{% endblock %}
 
 {% block content %}
-	
-	
-	<div class="form_body">
-		<h2 class="form__header">Registration</h2>
-		<h5 class="form__desctiption">
+
+
+<div class="register-container row">
+	<div class="form-title">
+		<h2 class="form-header">Registration</h2>
+		<p class="form-desctiption">
 			Create your account. It's free and only takes a minute
-		</h5>
-	 	<form action="" method="post" class="form_registr">
-	 		{% csrf_token %}
-		 	<div class="name-form">
-		 		<div class="form-group-reg">
-		 			<label for="{{form.first_name.id_for_label}}">First name</label>
-		 			{{form.first_name}}
-		 			<div class="form-error">
-		 				{{form.first_name.errors}}
-		 			</div>
-		 		</div>
+		</p>
+	</div>
 
-		 		<div class="form-group-reg">
-		 			<label for="{{form.last_name.id_for_label}}">Last name</label>
-		 			{{form.last_name}}
-		 			<div class="form-error">
-		 				{{form.last_name.errors}}
-		 			</div>
-		 		</div>
-		 	</div>
+	<form action="" method="post" class="col s12">
+		{% csrf_token %}
+		<div class="search-tickets-container row">
+			<div class="input-field col s6">
+				<i class="material-icons prefix">account_circle</i>
+				<label for="{{form.first_name.id_for_label}}">First name</label>
+				{{form.first_name}}
+				<div class="form-error">
+					{{form.first_name.errors}}
+				</div>
+			</div>
 
-	 		<div class="form-group-usual">
-	 			<label for="{{form.username.id_for_label}}">User name</label>
-	 			{{form.username}}
-	 			<div class="form-error">
-	 				{{form.username.errors}}
-	 			</div>
-		 	</div>	
+			<div class="input-field col s6">
+				<i class="material-icons prefix">account_circle</i>
+				<label for="{{form.last_name.id_for_label}}">Last name</label>
+				{{form.last_name}}
+				<div class="form-error">
+					{{form.last_name.errors}}
+				</div>
+			</div>
 
-		 	<div class="form-group-usual">
-	 			<label for="{{form.email.id_for_label}}">Email</label>
-	 			{{form.email}}
-	 			<div class="form-error">
-	 				{{form.email.errors}}
-	 			</div>
-		 	</div>
+			<div class="input-field col s12">
+				<i class="material-icons prefix">account_circle</i>
+				<label for="{{form.username.id_for_label}}">User name</label>
+				{{form.username}}
+				<div class="form-error">
+					{{form.username.errors}}
+				</div>
+			</div>
 
-		 	<div class="form-group-usual">
-	 			<label for="{{form.password1.id_for_label}}">Password</label>
-	 			{{form.password1}}
-	 			<div class="form-error">
-	 				{{form.password1.errors}}
-	 			</div>
-		 	</div>
+			<div class="input-field col s12">
+				<i class="material-icons prefix">email</i>
+				<label for="{{form.email.id_for_label}}">Email</label>
+				{{form.email}}
+				<div class="form-error">
+					{{form.email.errors}}
+				</div>
+			</div>
 
-		 	<div class="form-group-usual">
-	 			<label for="{{form.password2.id_for_label}}">Confirm password</label>
-	 			{{form.password2}}
-	 			<div class="form-error">
-	 				{{form.password2.errors}}
-	 			</div>
-		 	</div>
-		 	<br>
-		 	<div class="form-group-usual">
-	 			<label for="{{form.capcha.id_for_label}}">{{form.captcha.label}}</label>
-	 			{{form.captcha}}
-	 			<div class="form-error">
-	 				{{form.captcha.errors}}
-	 			</div>
-		 	</div>
+			<div class="input-field col s6">
+				<i class="material-icons prefix">password</i>
+				<label for="{{form.password1.id_for_label}}">Password</label>
+				{{form.password1}}
+				<div class="form-error">
+					{{form.password1.errors}}
+				</div>
+			</div>
 
-		 	<button type="submit" class="btn btn-success btn-block reg_butt">Register</button>
-	 	</form>
-	</div> 	
+			<div class="input-field col s6">
+				<i class="material-icons prefix">password</i>
+				<label for="{{form.password2.id_for_label}}">Confirm password</label>
+				{{form.password2}}
+				<div class="form-error">
+					{{form.password2.errors}}
+				</div>
+			</div>
+
+			<div class="input-field col s6">
+				<label for="{{form.capcha.id_for_label}}">{{form.captcha.label}}</label>
+				{{form.captcha}}
+				<div class="form-error">
+					{{form.captcha.errors}}
+				</div>
+			</div>
+
+			<div class="register-btn col s12">
+				<button type="submit" class="btn btn-success btn-block reg_butt">Register</button>
+			</div>
+		</div>
+	</form>
+</div>
 
 {% endblock %}

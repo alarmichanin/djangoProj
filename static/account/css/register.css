@@ -1,0 +1,59 @@
+:root {
+    --color-white: #ffffff;
+    --color-ligth-white: #ffffffbb;
+    --color-dark: #111111;
+    --color-ligth-green: rgba(2, 192, 130, .75);
+    --color-red: rgb(231, 55, 42);
+    --color-sky: #F9FBFD;
+    --color-ligth-sky: #f9fbfd9d;
+}
+
+.register-container {
+    width: auto;
+    margin: 0 auto;
+}
+
+.search-tickets-container {
+    margin: 0 auto;
+    background-color: var(--color-ligth-green);
+    padding: 50px;
+    border-radius: 15px;
+    position: relative;
+}
+
+.input-field > label {
+    color: var(--color-white);
+    font-weight: 700;
+}
+
+.form-title {
+    width: 50%;
+    background-color: var(--color-ligth-sky);
+
+    border-radius: 20px;
+    padding: 15px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+
+    color: var(--color-dark);
+
+    text-align: center;
+}
+
+.form-header {
+    font-weight: 600;
+    line-height: 1;
+    margin: 0;
+}
+
+.form-desctiption {
+
+}
+
+.register-btn {
+    margin: 0 auto;
+}
+
+.input-field .prefix.active {
+    color: var(--color-dark);
+}
