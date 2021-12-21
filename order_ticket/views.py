@@ -16,9 +16,10 @@ from django.views.generic.edit import FormView
 from django.shortcuts import render
 from django.urls import reverse
 from order_ticket.forms import OrderTicketForm
-from icecream import ic
 from django.contrib import messages
 from order_ticket.models import Railcar
+from order_ticket.services.database.order_seat import fill_tickets
+from order_ticket.services.order_ticket import NUMBER_OF_SEATS
 
 
 def order_train(request, start, end, rout_slug):
@@ -112,9 +113,10 @@ def order_seat(request, start, end, rout_slug, train, railcar):
     if request.method == "POST":
         seat = request.POST.get("seat")
         try:
-            if int(seat) not in range(1, Railcar.objects.first().amount_of_seats):
+            if int(seat) not in range(1, NUMBER_OF_SEATS):
                 raise ValueError
-        except Exception:
+        except Exception as e:
+            print(e)
             messages.add_message(
                 request,
                 messages.ERROR,

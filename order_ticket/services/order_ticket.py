@@ -1,6 +1,8 @@
 from order_ticket.models import Discount, Ticket, OrderTicket
 from search_ticket.models import Route, Train
 
+NUMBER_OF_SEATS = 40
+
 
 def get_client_ip(request):  # get current ip address
 
@@ -33,9 +35,8 @@ def get_ticket(route, train, railcar, seat):
 
 
 def create_customer_ticket(
-    ip, ticket, start, end, name, surname, patronymic, discount, email
+        ip, ticket, start, end, name, surname, patronymic, discount, email
 ):
-
     OrderTicket.objects.create(
         ip=ip,
         ticket=ticket,
@@ -53,7 +54,4 @@ def create_customer_ticket(
 
 
 def get_ordered_ticket(ticket_id, ip):
-
     return OrderTicket.objects.get(ticket=Ticket.objects.get(id=ticket_id), ip=ip)
-
-

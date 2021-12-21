@@ -19,6 +19,7 @@
       <img class="train-container-img" src="{% static 'search_ticket/img/DIESEL.png' %}" alt="Train">
       <p class="train-container-name">{{rout.route}}</p>
       <div class="train-container-buy">
+          {{rout}}
         <a class="justify-content-end waves-effect waves-light btn btn-buy"
         href="{% url 'order_train' start=start end=end  rout_slug=rout.route.slug %}"><i class="material-icons left">attach_money</i>Buy
         ticket</a>
