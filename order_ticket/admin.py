@@ -31,8 +31,8 @@ class TicketAdmin(admin.ModelAdmin):
 @admin.register(OrderTicket)
 class OrderTicketAdmin(admin.ModelAdmin):
     list_display = ('ticket', "start_point", "end_point", "customer_name", "customer_surname", )
-    readonly_fields = ('ticket', "start_point", "end_point", "customer_name", "customer_surname", "customer_patronymic",
+    readonly_fields = ('ticket', "start_point", "end_point", "customer_name", "customer_surname",
     "discount", "price", "email")
-    fields = ('ticket', "start_point", "end_point", "customer_name", "customer_surname", "customer_patronymic",
+    fields = ('ticket', "start_point", "end_point", "customer_name", "customer_surname",
     "discount", "price", "email")
 

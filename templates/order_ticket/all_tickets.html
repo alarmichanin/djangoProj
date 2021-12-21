@@ -1,0 +1,37 @@
+{% extends "../booking/base.html" %}
+
+{% block content %}
+{% for ordered_ticket in all_tickets %}
+    <div class="form-title">
+      <h4 class="form-header">{{ordered_ticket.start_point}} - {{ordered_ticket.end_point}}</h4>
+    </div>
+
+    <div class="form-container col s6" style="color:black;">
+      <div class="search-tickets-container row">
+        <ul class="collection">
+          <li class="collection-item">Full name:
+            {{ordered_ticket.customer_name}} {{ordered_ticket.customer_surname}} {{ordered_ticket.customer_patronymic}}
+          </li>
+          <li class="collection-item">
+              Route:<i class="material-icons tiny">place</i>{{ordered_ticket.start_point}} <i
+                  class="material-icons tiny">arrow_forward</i> <i
+                  class="material-icons tiny">place</i>{{ordered_ticket.end_point}}
+          </li>
+          <li class="collection-item">
+            Train: {{ordered_ticket.ticket.train.name}}
+          </li>
+          <li class="collection-item">
+            Railcar: {{ordered_ticket.ticket.railcar_number}}
+          </li>
+          <li class="collection-item">
+            Seat: {{ordered_ticket.ticket.seat}}
+          </li>
+          <li class="collection-item">
+            Price: {{ordered_ticket.price}}
+          </li>
+        </ul>
+      </div>
+    </div>
+{% endfor %}
+
+{% endblock content %}

@@ -73,7 +73,6 @@ class OrderTicket(models.Model):
 
     customer_name = models.CharField(("name"), max_length=50)
     customer_surname = models.CharField(("surname"), max_length=50)
-    customer_patronymic = models.CharField(("patronymic"), max_length=50)
 
     discount = models.PositiveIntegerField(null=True)
     price = models.PositiveIntegerField(("ticket price"))

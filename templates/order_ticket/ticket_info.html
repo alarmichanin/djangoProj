@@ -1,6 +1,5 @@
 {% extends "../booking/base.html" %}
 
-
 {% block link %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'order_ticket/css/ticket_info.css' %}">
@@ -24,12 +23,20 @@
                 class="material-icons tiny">place</i>{{ordered_ticket.end_point}}
         </li>
         <li class="collection-item">
-          Price: {{ordered_ticket.price}}
-        </li>
+            Train: {{ordered_ticket.ticket.train.name}}
+          </li>
+          <li class="collection-item">
+            Railcar: {{ordered_ticket.ticket.railcar_number}}
+          </li>
+          <li class="collection-item">
+            Seat: {{ordered_ticket.ticket.seat}}
+          </li>
+          <li class="collection-item">
+            Price: {{ordered_ticket.price}}
+          </li>
       </ul>
     </div>
   </div>
 </div>
 
-{# <a href="{% url 'order_railcar' route_slug  %}">BUTTON</a> #}
 {% endblock content %}

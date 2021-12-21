@@ -10,30 +10,33 @@
 <form action="" method="POST" class="col s12">
     {% csrf_token %}
     <div class="search-tickets-container">
-        <div class="input-field col s6">
-            <i class="material-icons prefix">account_circle</i>
-            <label for="{{form.name.id_for_label}}" class="active">Name</label>
-            {{form.name}}
-            <div class="form-error">
-                {{form.name.errors}}
+        {% if request.user.is_authenticated %}
+            <div class="input-field col s6">
+                <label for="name" class="active"><i class="material-icons small">account_circle</i>Name</label>
+                <input type="text" name="name" id="name" placeholder={{request.user.first_name}} disabled >
+
             </div>
-        </div>
-        <div class="input-field col s6">
-            <i class="material-icons prefix">account_circle</i>
-            <label for="{{form.surname.id_for_label}}" class="active">Surname</label>
-            {{form.surname}}
-            <div class="form-error">
-                {{form.surname.errors}}
+            <div class="input-field col s6">
+                <label for="surname" class="active"><i class="material-icons small">account_circle</i>Surname</label>
+                <input type="text" name="surname" id="surname" placeholder={{request.user.last_name}} disabled >
             </div>
-        </div>
-        <div class="input-field col s12">
-            <i class="material-icons prefix">account_circle</i>
-            <label for="{{form.patronymic.id_for_label}}" class="active">Patronymic</label>
-            {{form.patronymic}}
-            <div class="form-error">
-                {{form.patronymic.errors}}
+        {% else %}
+            <div class="input-field col s6">
+                <label for="{{form.name.id_for_label}}" class="active"><i class="material-icons small">account_circle</i>Name</label>
+                {{form.name}}
+                <div class="form-error">
+                    {{form.name.errors}}
+                </div>
             </div>
-        </div>
+            <div class="input-field col s6">
+                <label for="{{form.surname.id_for_label}}" class="active"><i class="material-icons small">account_circle</i>Surname</label>
+                {{form.surname}}
+                <div class="form-error">
+                    {{form.surname.errors}}
+                </div>
+            </div>
+        {% endif %}
+        
         <div class="input-field col s6">
             <i class="material-icons prefix">email</i>
             <label for="{{form.email.id_for_label}}" class="active">Email</label>

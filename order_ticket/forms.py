@@ -44,9 +44,8 @@ class OrderRailcarForm(forms.Form):
 class OrderTicketForm(forms.Form):
     """class of creating new post using modelform"""
 
-    name = forms.CharField(widget=forms.TextInput(attrs={"class": "validate"}))
-    surname = forms.CharField(widget=forms.TextInput(attrs={"class": "validate"}))
-    patronymic = forms.CharField(widget=forms.TextInput(attrs={"class": "validate"}))
+    name = forms.CharField(required=False, widget=forms.TextInput(attrs={"class": "validate"}))
+    surname = forms.CharField(required=False, widget=forms.TextInput(attrs={"class": "validate"}))
     discount = forms.CharField(required=False, widget=forms.TextInput())
     email = forms.CharField(widget=forms.TextInput(attrs={"class": "validate"}))
     # date = forms.DateField(

@@ -9,8 +9,8 @@ from order_ticket.services.order_ticket import (
 )
 from search_ticket.services.find_route.routs import get_station_by_name
 from django.http import HttpResponseRedirect
-from django.views.generic import TemplateView
-from order_ticket.models import Ticket
+from django.views.generic import TemplateView, ListView
+from order_ticket.models import Ticket, OrderTicket
 from search_ticket.models import Route, Train
 from django.views.generic.edit import FormView
 from django.shortcuts import render
@@ -18,8 +18,17 @@ from django.urls import reverse
 from order_ticket.forms import OrderTicketForm
 from django.contrib import messages
 from order_ticket.models import Railcar
+# <<<<<<< Updated upstream
 from order_ticket.services.database.order_seat import fill_tickets
 from order_ticket.services.order_ticket import NUMBER_OF_SEATS
+# =======
+from order_ticket.services.database.order_places import (
+    fill_tickets,
+    get_available_seats,
+    get_available_trains,
+    get_available_railcars
+)
+# >>>>>>> Stashed changes
 
 
 def order_train(request, start, end, rout_slug):
@@ -37,10 +46,9 @@ def order_train(request, start, end, rout_slug):
                 },
             )
         )
-    available_trains = Ticket.objects.filter(
-        route=Route.objects.get(slug=rout_slug), is_taken=False
-    )
-    available_trains = {elem.train for elem in available_trains}
+    if not Ticket.objects.filter(route=Route.objects.get(slug=rout_slug)):
+        fill_tickets(Route.objects.get(slug=rout_slug))
+    available_trains = get_available_trains(rout_slug)
     return render(
         request,
         "order_ticket/order_train.html",
@@ -70,14 +78,7 @@ def order_railcar(request, start, end, rout_slug, train):
             )
         )
     try:
-        available_reilcars = {
-            elem.railcar_number
-            for elem in Ticket.objects.filter(
-                route=Route.objects.get(slug=rout_slug),
-                train=Train.objects.get(slug=train),
-                is_taken=False,
-            )
-        }
+        available_reilcars = get_available_railcars(rout_slug, train)
     except Exception:
         messages.add_message(
             request,
@@ -149,15 +150,8 @@ def order_seat(request, start, end, rout_slug, train, railcar):
         )
 
     try:
-        available_seats = {
-            elem.seat
-            for elem in Ticket.objects.filter(
-                route=Route.objects.get(slug=rout_slug),
-                train=Train.objects.get(slug=train),
-                railcar_number=int(railcar),
-                is_taken=False,
-            )
-        }
+        available_seats = get_available_seats(rout_slug, train, railcar)
+
         if int(railcar) not in range(
             1, Train.objects.get(slug=train).number_of_railcar
         ):
@@ -196,7 +190,7 @@ def order_seat(request, start, end, rout_slug, train, railcar):
     )
 
 
-class OrderTicket(FormView):
+class TicketOrder(FormView):
 
     model = Ticket
     template_name = "order_ticket/order_ticket.html"
@@ -211,9 +205,11 @@ class OrderTicket(FormView):
 
         form = OrderTicketForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data["name"]
-            surname = form.cleaned_data["surname"]
-            patronymic = form.cleaned_data["patronymic"]
+            if request.user.is_authenticated:
+                name, surname = request.user.first_name, request.user.last_name
+            else:
+                name = form.cleaned_data["name"]
+                surname = form.cleaned_data["surname"]
             disc = form.cleaned_data["discount"]
             if disc:
                 if not get_discount(disc):
@@ -245,10 +241,10 @@ class OrderTicket(FormView):
                 get_station_by_name(end),
                 name,
                 surname,
-                patronymic,
                 discount,
-                email,
+                email
             )
+
             return HttpResponseRedirect(
                 reverse(
                     "ticket_info",
@@ -278,7 +274,10 @@ class OrderTicket(FormView):
     def get_context_data(self, **kwargs):
 
         form = OrderTicketForm(self.request.POST)
-        context = {"title": "order", "form": form}
+        context = {
+            "title": "order",
+            "form": form,
+        }
         return context
 
 
@@ -292,5 +291,19 @@ class TicketInfo(TemplateView):
         ip = self.kwargs["ip"]
 
         ordered_ticket = get_ordered_ticket(ticket_id, ip)
+
         context = {"ordered_ticket": ordered_ticket}
+        return context
+
+
+class AllUserTicket(ListView):
+
+    model = OrderTicket
+    template_name = "order_ticket/all_tickets.html"
+
+    def get_context_data(self, **kwargs):
+
+        user_ip = get_client_ip(self.request)
+
+        context = {"ip": user_ip, "all_tickets": OrderTicket.objects.filter(ip=user_ip)}
         return context

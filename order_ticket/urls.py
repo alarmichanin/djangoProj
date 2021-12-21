@@ -2,9 +2,10 @@ from django.urls import path
 from order_ticket.views import (
     order_seat,
     order_railcar,
-    OrderTicket,
+    TicketOrder,
     order_train,
     TicketInfo,
+    AllUserTicket,
 )
 
 
@@ -22,12 +23,17 @@ urlpatterns = [
     path("routs_for_user/<start>/<end>/<rout_slug>/", order_train, name="order_train"),
     path(
         "routs_for_user/<start>/<end>/<rout_slug>/<train>/<railcar>/<seat>/",
-        OrderTicket.as_view(),
+        TicketOrder.as_view(),
         name="order_ticket",
     ),
     path(
         "tickets/<ticket>/<ip>",
         TicketInfo.as_view(),
         name="ticket_info",
+    ),
+    path(
+        "all_tickets/",
+        AllUserTicket.as_view(),
+        name="all_tickets",
     ),
 ]

@@ -1,7 +1,14 @@
 from order_ticket.models import Discount, Ticket, OrderTicket
 from search_ticket.models import Route, Train
 
+# <<<<<<< Updated upstream
+
 NUMBER_OF_SEATS = 40
+
+# =======
+from order_ticket.services.ticket_info import send_email_info
+
+# >>>>>>> Stashed changes
 
 
 def get_client_ip(request):  # get current ip address
@@ -35,23 +42,43 @@ def get_ticket(route, train, railcar, seat):
 
 
 def create_customer_ticket(
-        ip, ticket, start, end, name, surname, patronymic, discount, email
+    # <<<<<<< Updated upstream
+    ip,
+    ticket,
+    start,
+    end,
+    name,
+    surname,
+    discount,
+    email,
 ):
-    OrderTicket.objects.create(
+    #     OrderTicket.objects.create(
+    # # =======
+    #     ip, ticket, start, end, name, surname, discount, email
+    # ):
+
+    ticket = OrderTicket.objects.create(
+        # >>>>>>> Stashed changes
         ip=ip,
         ticket=ticket,
         start_point=start,
         end_point=end,
         customer_name=name,
         customer_surname=surname,
-        customer_patronymic=patronymic,
         discount=discount,
         email=email,
         price=100 - 100 * discount,
     )
     ticket.is_taken = True
     ticket.save()
+    send_email_info(ticket)
+    # return ticket
 
 
 def get_ordered_ticket(ticket_id, ip):
-    return OrderTicket.objects.get(ticket=Ticket.objects.get(id=ticket_id), ip=ip)
+
+    return OrderTicket.objects.filter(
+        ticket=Ticket.objects.get(id=ticket_id), ip=ip
+    ).first()
+
+

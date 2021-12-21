@@ -5,17 +5,14 @@ from django.views.generic import ListView, TemplateView
 from search_ticket.services.find_route.routs import (
     get_routs_according_to_direction,
     get_station_by_name,
+    get_unique_stations
 )
 from search_ticket.utils import DataMixin
 from django.contrib import messages
-from search_ticket.models import RouteStation, Route
-from order_ticket.models import Ticket
-from order_ticket.services.database.order_seat import fill_tickets
+
+from search_ticket.models import RouteStation
 
 from .forms import SearchRouteForm
-from icecream import ic
-
-# Create your views here.
 
 
 def get_home_page(request):
@@ -26,10 +23,6 @@ def get_home_page(request):
         form = SearchRouteForm(request.POST)
 
         if form.is_valid():
-            request.session.set_expiry(1000)
-            request.session["start_point"] = form.cleaned_data["start_point"]
-            request.session["end_point"] = form.cleaned_data["end_point"]
-            request.session["date"] = request.POST["date"]
             return HttpResponseRedirect(
                 reverse(
                     "get_avaluable_routs",
@@ -48,9 +41,11 @@ def get_home_page(request):
     else:
 
         form = SearchRouteForm()
-
+    stations = get_unique_stations()
     return render(
-        request, template_name="search_ticket/home_page.html", context={"form": form}
+        request,
+        template_name="search_ticket/home_page.html",
+        context={"form": form, "stations": stations},
     )
 
 

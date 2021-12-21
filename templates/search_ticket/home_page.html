@@ -13,18 +13,21 @@
         <div class="row search-tickets-container">
                 <div class="input-field col s4">
                     <label for="{{form.start_point.id_for_label}}" class="active"><i class="material-icons">place</i>From</label>
-                    {{form.start_point}}
-                    <div class="form-error">
-                        {{form.start_point.errors}}
-                    </div>
+                    <input type="text" list="station_list" required class="form-control" name="start_point" id="">
+                    <datalist id="station_list" >
+                        {% for res in stations %}
+                            <option value="{{res}}">
+                        {% endfor %}
+                    </datalist>
                 </div>
 
                 <div class="input-field col s4">
                     <label for="{{form.end_point.id_for_label}}" class="active"><i class="material-icons">place</i>To</label>
-                    {{form.end_point}}
-                    <div class="form-error">
-                        {{form.end_point.errors}}
-                    </div>
+                    <input type="text" list="station_list" class="form-control" required name="end_point" id="">
+                    <datalist id="station_list" >
+                        {% for res in stations %}
+                            <option value="{{res.name}}">
+                        {% endfor %}
                 </div>
 
                 <div class="input-field col s4">

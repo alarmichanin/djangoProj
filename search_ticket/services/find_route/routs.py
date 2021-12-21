@@ -1,6 +1,5 @@
 from search_ticket.models import RouteStation, Station
 from itertools import chain
-from icecream import ic
 
 
 def get_routs_according_to_direction(start_point, end_point):
@@ -29,5 +28,10 @@ def get_routs_according_to_direction(start_point, end_point):
 
 def get_station_by_name(station_name):
 
-    ic(Station.objects.filter(name=station_name).first())
     return Station.objects.filter(name=station_name).first()
+
+
+def get_unique_stations():
+
+    stations = Station.objects.all()
+    return {elem.name for elem in stations}

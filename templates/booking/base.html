@@ -52,13 +52,25 @@
 						<a href="{% url 'team_view' %}">Team</a>
 					</li>
 					<li class="nav-list-item">
-						<a href="{% url 'pricing_view' %}">Pricing</a>
-					</li>
-					<li class="nav-list-item">
 						<a href="{% url 'contacts_view' %}">Contact</a>
 					</li>
+					<li class="nav-list-item">
+						<a href="{% url 'all_tickets' %}">My Tickets</a>
+					</li>
 				</ul>
+				<div class="account">
+					{% if request.user.is_authenticated %}
+					    <a href="{% url "logout" request.user.username %}">Logout</a> 
+					{% else %}
+					    <a href="{% url "sign_in" %}">Login</a> | 
+						<a href="{% url "register" %}">Register</a>
+					{% endif %}
+				</div>
+				<div class="all_tickets">
+					
+				</div>
 			</div>
+
 		</nav>
 	</header>
 
@@ -126,6 +138,7 @@
 	<script src="{% static 'order_ticket/js/choose_place.js' %}"></script>
 	<script src="{% static 'order_ticket/js/order_seat.js' %}"></script>
 	<script src="{% static 'order_ticket/js/order_ticket.js' %}"></script>
+	
 </body>
 
 </html>
