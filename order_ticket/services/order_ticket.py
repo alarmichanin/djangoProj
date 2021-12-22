@@ -42,7 +42,6 @@ def get_ticket(route, train, railcar, seat):
 
 
 def create_customer_ticket(
-    # <<<<<<< Updated upstream
     ip,
     ticket,
     start,
@@ -66,7 +65,7 @@ def create_customer_ticket(
     )
     ticket.is_taken = True
     ticket.save()
-    send_email_info(ticket)
+    # send_email_info(ticket)
     # return ticket
 
 
