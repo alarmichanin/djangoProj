@@ -65,3 +65,9 @@
 .collection {
     color: var(--color-dark);
 }
+
+@media (max-width: 600px) {
+    .form-header {
+        font-size: 20px;
+    }
+}

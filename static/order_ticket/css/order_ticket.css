@@ -26,3 +26,10 @@
 .input-field .prefix.active {
     color: var(--color-dark);
 }
+
+@media (max-width: 600px) {
+    .search-tickets-container {
+        width: 90%;
+        padding: 25px;
+    }
+}

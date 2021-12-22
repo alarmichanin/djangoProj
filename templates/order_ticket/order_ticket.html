@@ -12,24 +12,28 @@
     <div class="search-tickets-container">
         {% if request.user.is_authenticated %}
             <div class="input-field col s6">
-                <label for="name" class="active"><i class="material-icons small">account_circle</i>Name</label>
+                <i class="material-icons prefix">account_circle</i>
+                <label for="name" class="active">Name</label>
                 <input type="text" name="name" id="name" placeholder={{request.user.first_name}} disabled >
 
             </div>
             <div class="input-field col s6">
-                <label for="surname" class="active"><i class="material-icons small">account_circle</i>Surname</label>
+                <i class="material-icons prefix">account_circle</i>
+                <label for="surname" class="active">Surname</label>
                 <input type="text" name="surname" id="surname" placeholder={{request.user.last_name}} disabled >
             </div>
         {% else %}
             <div class="input-field col s6">
-                <label for="{{form.name.id_for_label}}" class="active"><i class="material-icons small">account_circle</i>Name</label>
+                <i class="material-icons prefix">account_circle</i>
+                <label for="{{form.name.id_for_label}}" class="active">Name</label>
                 {{form.name}}
                 <div class="form-error">
                     {{form.name.errors}}
                 </div>
             </div>
             <div class="input-field col s6">
-                <label for="{{form.surname.id_for_label}}" class="active"><i class="material-icons small">account_circle</i>Surname</label>
+                <i class="material-icons prefix">account_circle</i>
+                <label for="{{form.surname.id_for_label}}" class="active">Surname</label>
                 {{form.surname}}
                 <div class="form-error">
                     {{form.surname.errors}}

@@ -11,6 +11,9 @@
 	<link rel="icon" type="image" href="{% static 'base/img/favicon.png' %}">
 	<link type="text/css" rel="stylesheet" href="{% static 'base/css/materialize.min.css' %}"
 		media="screen,projection" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
 	<link rel="stylesheet" href="{% static 'base/css/base.css' %}">
 	<!-- <link rel="stylesheet" href="{% static 'base/css/testimonials.css' %}"> -->
 
@@ -57,20 +60,20 @@
 					<li class="nav-list-item">
 						<a href="{% url 'all_tickets' %}">My Tickets</a>
 					</li>
+					<li class="nav-list-item">
+						<div class="account">
+							{% if request.user.is_authenticated %}
+								<a class="account-action" href="{% url "logout" request.user.username %}">Logout</a> 
+							{% else %}
+								<div class="account-action">
+									<a href="{% url "sign_in" %}">Login</a>
+									<a href="{% url "register" %}">Register</a>
+								</div>
+							{% endif %}
+						</div>
+					</li>
 				</ul>
-				<div class="account">
-					{% if request.user.is_authenticated %}
-					    <a href="{% url "logout" request.user.username %}">Logout</a> 
-					{% else %}
-					    <a href="{% url "sign_in" %}">Login</a> | 
-						<a href="{% url "register" %}">Register</a>
-					{% endif %}
-				</div>
-				<div class="all_tickets">
-					
-				</div>
 			</div>
-
 		</nav>
 	</header>
 

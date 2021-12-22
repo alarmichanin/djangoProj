@@ -8,7 +8,32 @@
 
 
 {% block content %}
-    TEAM text
+<div class="carousel carousel-slider center">
+    <div class="carousel-fixed-item center">
+      <a class="btn waves-effect white grey-text darken-text-2">next</a>
+    </div>
+    <div class="carousel-item white-text" href="#one!">
+      <h2>YAROSLAV DYHANOV</h2>
+      <p class="white-text">DJANGO/FLASK  WEB DEVELOPER</p>
+      {% load static %}
+      <img class="railcar-img" src="{% static 'base/img/Yaryk.png' %}" alt="Yaryk">
+    </div>
+    <div class="carousel-item white-text" href="#two!">
+      <h2>VITALA KOVALOV</h2>
+      <p class="white-text">ReactJS DEVELOPER</p>
+      <img class="railcar-img" src="{% static 'base/img/Vitala.png' %}" alt="Vitala">
+    </div>
+    <div class="carousel-item white-text" href="#three!">
+        <h2>ROMAN TKACHENKO</h2>
+        <p class="white-text">JS DEVELOPER</p>
+        <img class="railcar-img" src="{% static 'base/img/Roma.png' %}" alt="Roma">
+    </div>
+    <div class="carousel-item white-text" href="#four!">
+        <h2>VASILIY PAVLIUK</h2>
+        <p class="white-text">.NET DEVELOPER</p>
+        <img class="railcar-img" src="{% static 'base/img/Vasia.png' %}" alt="Vasia">
+    </div>
+  </div>
 {% endblock content %}
 
 

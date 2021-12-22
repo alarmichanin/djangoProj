@@ -19,10 +19,10 @@
 		</p>
 	</div>
 
-	<form action="" method="post" class="col s12">
+	<form action="" method="post" class="form-container col s12 m10 l8">
 		{% csrf_token %}
 		<div class="search-tickets-container row">
-			<div class="input-field col s6">
+			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">account_circle</i>
 				<label for="{{form.first_name.id_for_label}}">First name</label>
 				{{form.first_name}}
@@ -31,7 +31,7 @@
 				</div>
 			</div>
 
-			<div class="input-field col s6">
+			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">account_circle</i>
 				<label for="{{form.last_name.id_for_label}}">Last name</label>
 				{{form.last_name}}
@@ -58,7 +58,7 @@
 				</div>
 			</div>
 
-			<div class="input-field col s6">
+			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">password</i>
 				<label for="{{form.password1.id_for_label}}">Password</label>
 				{{form.password1}}
@@ -67,7 +67,7 @@
 				</div>
 			</div>
 
-			<div class="input-field col s6">
+			<div class="input-field col s12 m6">
 				<i class="material-icons prefix">password</i>
 				<label for="{{form.password2.id_for_label}}">Confirm password</label>
 				{{form.password2}}

@@ -78,7 +78,6 @@
     border-radius: 10px;
 }
 
-
 .choose-railcar-form {
     width: 50%;
     margin: 0 auto;
@@ -88,4 +87,10 @@
     background-color: var(--color-white);
     padding: 10px;
     border-radius: 10px;
+}
+
+@media (max-width: 600px) {
+    .choose-railcar-form {
+        width: 100%;
+    }
 }

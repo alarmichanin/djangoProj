@@ -3,6 +3,7 @@
   --color-dark: #111111;
   --color-ligth-grey: #323232b9;
   --color-green: rgba(2, 192, 130, .75);
+  --color-ligth-green: rgba(2, 192, 130, .75);
   --color-red: rgba(240, 37, 37, 0.75);
 }
 
@@ -146,7 +147,7 @@ a {
   display: flex;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 997px) {
   .nav-list {
     position: absolute;
     top: 64px;
@@ -159,24 +160,22 @@ a {
     transition: all 2s ease;
   }
 
-  @media (min-width: 767px) {
-    .nav-list {
-      margin-top: 0px;
-    }
-  }
-
   .nav-list:hover {
     transform: translate(0%, 0%);
     transition: all 1s ease;
   }
 }
 
+#nav-list {
+  margin-top: -680px;
+}
+
 .nav-list-item {
-  margin-left: 30px;
+  margin-left: 15px;
   position: relative;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1200px) {
   .nav-list-item {
     margin-left: 0px;
   }
@@ -197,11 +196,11 @@ a {
   left: 0;
   width: 0%;
   height: 4px;
-  background: #3aced3;
+  background: var(--color-green);
   transition: all 0.3s ease;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 997px) {
   .nav-list-item a:before {
     display: none;
   }
@@ -211,7 +210,7 @@ a {
   transition: all 0.3s ease;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 997px) {
   .nav-list-item a:hover {
     color: var(--color-white);
   }
@@ -236,7 +235,7 @@ a {
   cursor: pointer;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 997px) {
   .nav-burger-menu {
     display: block;
   }
@@ -261,10 +260,10 @@ a {
 }
 
 .search-tickets-title h1 {
-  font-size: 35px;
+  font-size: 40px;
   font-weight: 700;
   line-height: 110%;
-  margin: 55px 0;
+  margin: 35px 0;
   text-transform: uppercase;
   text-align: center;
 }
@@ -312,4 +311,18 @@ a {
   font-weight: 600;
 
   transition: 0.5s all ease;
+}
+
+.account {
+  display: inline;
+  border-radius: 20px;
+  background-color: var(--color-ligth-green);
+}
+
+.account-action {
+  display: inline;
+}
+
+.account-action a {
+  display: inline;
 }

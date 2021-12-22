@@ -1,0 +1,40 @@
+.btn {
+    visibility: hidden;
+}
+
+img {
+    width: 300px;
+    height: auto;
+}
+
+h2 {
+    margin: 5px;
+}
+
+.carousel.carousel-slider .carousel-item {
+    min-width: 25%;
+    max-width: 35%;
+    min-height: 250px;
+    margin: 0 auto;
+}
+
+.carousel {
+    height: 500px;
+    perspective: 300px;
+}
+
+@media (max-width: 600px) {
+    .carousel.carousel-slider .carousel-item h2 {
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 18px;
+    }
+
+    .carousel.carousel-slider .carousel-item p {
+        font-size: 12px;
+    }
+
+    .carousel {
+        height: 250px;
+    }
+}

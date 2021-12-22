@@ -24,13 +24,13 @@
     position: relative;
 }
 
-.input-field > label {
+.input-field>label {
     color: var(--color-white);
     font-weight: 700;
 }
 
 .form-title {
-    width: 50%;
+    width: 70%;
     background-color: var(--color-ligth-sky);
 
     border-radius: 20px;
@@ -44,7 +44,8 @@
 }
 
 .form-header {
-    font-weight: 600;
+    font-size: 35px;
+    font-weight: 800;
     line-height: 1;
     margin: 0;
 }
@@ -59,4 +60,18 @@
 
 .input-field .prefix.active {
     color: var(--color-dark);
+}
+
+@media (max-width: 700px) {
+    .form-header {
+        font-size: 30px;
+    }
+
+    .form-desctiption {
+        font-size: 17px;
+    }
+
+    .search-tickets-container {
+        padding: 25px;
+    }
 }

@@ -19,9 +19,9 @@
         </h5>
     </div>
 
-    <form action="" method="post" class="form-container col s6">
+    <form action="" method="post" class="form-container col s12 m8 l6">
+        {% csrf_token %}
         <div class="search-tickets-container row">
-            {% csrf_token %}
             <div class="input-field col s12">
                 <i class="material-icons prefix">account_circle</i>
                 <label for="{{form.username.id_for_label}}">User name</label>

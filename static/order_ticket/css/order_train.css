@@ -18,6 +18,12 @@
     color: var(--color-dark);
 }
 
+@media (max-width: 600px) {
+    .container-verifi {
+        width: 90%;
+    }
+}
+
 .container-verifi-header {
     text-align: center;
     font-weight: 700;

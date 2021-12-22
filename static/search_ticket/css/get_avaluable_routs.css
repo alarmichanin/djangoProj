@@ -23,11 +23,11 @@
 .train-container-img {
     border-radius: 10px;
     width: 15%;
-    height: auto;
+    height: 15%;
 }
 
 .train-container-name {
-    width: 40%;
+    width: 50%;
     font-size: 20px;
     font-weight: 700;
     margin-left: 20px;
@@ -71,4 +71,33 @@
     background-color: var(--color-white);
     padding: 5px;
     border-radius: 10px;
+}
+
+@media (max-width: 750px) {
+    .train-container {
+        justify-content: space-between;
+        flex-direction: column;
+    }
+
+    .train-container-img {
+        border-radius: 10px;
+        width: 15%;
+        height: 15%;
+        margin: 0 auto;
+        margin-bottom: 10px;
+    }
+    
+    .train-container-name {
+        width: 100%;
+        text-align: center;
+        margin-left: 0px;
+        margin-bottom: 10px;
+    }
+    
+    .train-container-buy {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
