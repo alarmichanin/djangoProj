@@ -2,7 +2,7 @@
 
 {% block content %}
 {% for ordered_ticket in all_tickets %}
-<a href="{% url " ticket_info" ordered_ticket.ticket.id ip %}">
+<a href="{% url "ticket_info" ordered_ticket.ticket.id ip %}">
   <div class="form-title">
     <h4 class="form-header">{{ordered_ticket.start_point}} - {{ordered_ticket.end_point}}</h4>
   </div>

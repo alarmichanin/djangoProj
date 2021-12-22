@@ -24,3 +24,9 @@ urlpatterns = [
     path("ticket/", include("order_ticket.urls"))
 
 ]
+
+
+handler404 = "account.views.handle_not_found"
+handler500 = "account.views.handle_server_error"
+handler400 = "account.views.handle_url_error"
+handler403 = "account.views.handler_forbiden"

@@ -52,13 +52,8 @@ def create_customer_ticket(
     discount,
     email,
 ):
-    #     OrderTicket.objects.create(
-    # # =======
-    #     ip, ticket, start, end, name, surname, discount, email
-    # ):
 
     ticket = OrderTicket.objects.create(
-        # >>>>>>> Stashed changes
         ip=ip,
         ticket=ticket,
         start_point=start,
@@ -71,7 +66,7 @@ def create_customer_ticket(
     )
     ticket.is_taken = True
     ticket.save()
-    # send_email_info(ticket)
+    send_email_info(ticket)
     # return ticket
 
 
