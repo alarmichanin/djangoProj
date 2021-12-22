@@ -65,7 +65,7 @@ def create_customer_ticket(
     )
     ticket.is_taken = True
     ticket.save()
-    # send_email_info(ticket)
+    send_email_info(ticket)
     # return ticket
 
 
