@@ -31,9 +31,9 @@
   <form action="{% url 'order_seat' start end route_slug train railcar  %}" method="POST" class="choose-railcar-form">
     {% csrf_token %}
     <div class="input-container row">
-      <label class="" for="choose-seat">Choosed seat:</label>
-      <input type="text" name="seat" id="choose-seat" value="1">
-      <button type="submit" class="waves-effect waves-light btn">submit</button>
+      <label class="col s4" for="choose-seat">Choosed seat:</label>
+      <input type="text" name="seat" id="choose-seat" class="col s4">
+      <button type="submit" class="waves-effect waves-light btn col s4" id="send-seat-btn">submit</button>
     </div>
   </form>
   {# <a href="{% url 'order_railcar' route_slug  %}">BUTTON</a> #}

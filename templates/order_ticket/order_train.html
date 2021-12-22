@@ -4,6 +4,7 @@
 {% block link %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'order_ticket/css/order_train.css' %}">
+	<!-- <script src="{% static 'order_ticket/js/order_train.js' %}"></script> -->
 {% endblock %}
 
 {% block content %}
@@ -22,7 +23,7 @@
       <input type="text" name="train" id="id">
       <p>*enter what you see above</p>
     </div>
-    <button type="submit" class="waves-effect waves-light btn col s4">send</button>
+    <button type="submit" class="waves-effect waves-light btn col s4" id="send-btn">send</button>
   </form>  
   {# <a href="{% url 'order_railcar' route_slug  %}">BUTTON</a> #}
 </div>
