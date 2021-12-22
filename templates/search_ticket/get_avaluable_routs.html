@@ -25,7 +25,10 @@
       </div>
     </div>
     {% empty %}
-      <p>it feels like there is no any route for this direction </p>
+    <div class="empty-container">
+      <img src="{% static 'search_ticket/img/box.png' %}" alt="empty box">
+      <p class="empty">It feels like there is no any route for this direction</p>
+    </div>
     {% endfor %}
   </div>
 </div>

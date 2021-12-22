@@ -3,6 +3,7 @@
     --color-ligth-white: #ffffffbb;
     --color-dark: #111111;
     --color-ligth-green: rgba(2, 192, 130, .75);
+    --color-red: #9b3232;
 }
 
 .train-container {
@@ -67,7 +68,7 @@
 
 .routes-point {
     color: var(--color-dark);
-    font-size: 15px;
+    font-size: 18px;
     background-color: var(--color-white);
     padding: 5px;
     border-radius: 10px;
@@ -100,4 +101,27 @@
         justify-content: center;
         align-items: center;
     }
+}
+
+.empty-container {
+    width: 50%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.empty-container img {
+    width: 150px;
+}
+
+.empty {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--color-dark);
 }
