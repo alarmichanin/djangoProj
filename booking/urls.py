@@ -21,12 +21,10 @@ from django.conf import settings
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
     path("", include("search_ticket.urls")),
     path("account/", include("account.urls")),
-
-    path("ticket/", include("order_ticket.urls"))
-
+    path("ticket/", include("order_ticket.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()
