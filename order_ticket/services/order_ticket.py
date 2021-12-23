@@ -1,3 +1,4 @@
+from search_ticket.models import RouteStation
 from order_ticket.models import Discount, Ticket, OrderTicket
 from search_ticket.models import Route, Train
 
@@ -52,6 +53,10 @@ def create_customer_ticket(
     email,
 ):
 
+    price=RouteStation.objects.get(route__slug=ticket.route.slug).price_from_start
+    # print(price, discount)
+    # price = int(price - price * discount/100)
+    # print(price)
     ticket = OrderTicket.objects.create(
         ip=ip,
         ticket=ticket,
@@ -61,8 +66,9 @@ def create_customer_ticket(
         customer_surname=surname,
         discount=discount,
         email=email,
-        price=100 - 100 * discount,
+        price=price,
     )
+    # print(RouteStation.objects.get(route__slug=ticket.route.slug).price_from_start, discount)
     ticket.is_taken = True
     ticket.save()
     send_email_info(ticket)

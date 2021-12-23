@@ -232,16 +232,21 @@ class TicketOrder(FormView):
             ticket = get_ticket(
                 get_route(rout_slug), get_train(train_slug), railcar, seat
             )
-            create_customer_ticket(
-                get_client_ip(request),
-                ticket,
-                get_station_by_name(start),
-                get_station_by_name(end),
-                name,
-                surname,
-                discount,
-                email
-            )
+
+            print(discount)
+            try: 
+                create_customer_ticket(
+                    get_client_ip(request),
+                    ticket,
+                    get_station_by_name(start),
+                    get_station_by_name(end),
+                    name,
+                    surname,
+                    discount,
+                    email
+                )
+            except Exception as e:
+                print(e)
 
             return HttpResponseRedirect(
                 reverse(
